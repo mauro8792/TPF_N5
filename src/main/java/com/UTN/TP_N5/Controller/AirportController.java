@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RestController
-@RequestMapping("/airports")
+@RequestMapping("/airport")
 public class AirportController {
 
     @Autowired

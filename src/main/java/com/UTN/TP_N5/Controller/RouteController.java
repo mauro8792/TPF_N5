@@ -3,6 +3,7 @@ package com.UTN.TP_N5.Controller;
 
 import com.UTN.TP_N5.Model.City;
 import com.UTN.TP_N5.Model.Routes;
+import com.UTN.TP_N5.Repository.DaoCity;
 import com.UTN.TP_N5.Repository.DaoRoute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +16,15 @@ public class RouteController  {
 
     @Autowired
     private DaoRoute daoRoute;
-    private Routes ruta;
+    @Autowired
+    private DaoCity daoCity;
 
     @PostMapping(value = "/")
-    public void create(City origin, City destination, float distance){
-       Routes nuevo = new Routes(origin,destination,distance);
+    public void create(Long origin, Long destination, String distance){
+        City origen = this.daoCity.findById(origin).get();
+        City destino = this.daoCity.findById(destination).get();
+        Float distancia = Float.parseFloat(distance);
+        Routes nuevo = new Routes(origen,destino,distancia);
         this.daoRoute.save(nuevo);
     }
     @DeleteMapping(value = "/{id}")

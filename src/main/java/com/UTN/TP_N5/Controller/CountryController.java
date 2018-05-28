@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Country")
+@RequestMapping("/country")
 public class CountryController {
 
     @Autowired
@@ -21,13 +21,13 @@ public class CountryController {
         this.daoCountry.save(nuevo);
     }
 
-    @DeleteMapping (value = "/{id}")
-    public void deleteCountryForId(@PathVariable("id") Long id){
+    @DeleteMapping (value = "/getById/{id}")
+    public void deleteCountryForName(@PathVariable("id") Long id){
         Country pais = daoCountry.findById(id).get();
         daoCountry.delete(pais);
     }
 
-    @GetMapping(value = "/{id}",produces = "application/json")
+    @GetMapping(value = "/delete/{id}",produces = "application/json")
     public Country getById(@PathVariable("id") Long id){
         Country pais = new Country();
         pais = daoCountry.findById(id).get();

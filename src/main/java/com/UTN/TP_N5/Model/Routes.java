@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -15,7 +16,7 @@ import javax.validation.constraints.NotBlank;
 public class Routes {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "id_route")
+    @Column(name = "id")
     private Long id;
 
     @OneToOne
@@ -24,16 +25,15 @@ public class Routes {
     @OneToOne
     private City destination;
 
-    @NotBlank
     @Column(name = "distance")
-    private  float distance;
+    private float distance;
 
     public Routes (City origin, City destination, float distance){
         this.origin=origin;
         this.destination=destination;
         this.distance=distance;
     }
-    public  Routes (Long id){
+    public Routes(Long id){
         this.id=id;
     }
 }
