@@ -28,6 +28,7 @@ public class City {
     private String nombre;
 
     @ManyToOne
+    @JoinColumn(name = "fk_id_country")
     private Country fk;
 
     public City(String Name, String Iata, Country fk){

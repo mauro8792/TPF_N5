@@ -1,6 +1,7 @@
 package com.UTN.TP_N5.Model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "Cabins")
 public class Cabin {
     @Id
@@ -19,4 +21,8 @@ public class Cabin {
     @NotBlank
     @Column(name = "name")
     private String nombre;
+
+    public Cabin(String name){
+        this.nombre=name;
+    }
 }

@@ -29,7 +29,7 @@ public class Airport {
     private String iata; //Ejemplo MDQ, EZE, MDZ
 
     @OneToOne
-    @JoinColumn(name = "id_city", foreignKey = @ForeignKey(name = "fk_id_city"))
+    //@JoinColumn(name = "id_city", foreignKey = @ForeignKey(name = "fk_id_city"))
     private City fk;
 
     @NotBlank

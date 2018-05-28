@@ -22,7 +22,7 @@ public class CountryController {
     }
 
     @DeleteMapping (value = "/{id}")
-    public void deleteCountryForName(@PathVariable("id") Long id){
+    public void deleteCountryForId(@PathVariable("id") Long id){
         Country pais = daoCountry.findById(id).get();
         daoCountry.delete(pais);
     }
@@ -34,7 +34,7 @@ public class CountryController {
         return pais;
     }
     @GetMapping(value = "/")
-    public List getAllAirports(){
+    public List getAllCountrie(){
         List <Country> ciudades = (List<Country>) this.daoCountry.findAll();
         return ciudades;
     }
