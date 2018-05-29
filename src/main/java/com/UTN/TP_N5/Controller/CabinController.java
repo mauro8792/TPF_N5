@@ -15,8 +15,7 @@ public class CabinController {
     private DaoCabin daoCabin;
 
     @PostMapping(value = "/")
-    public void create(String name, String iso){
-        Cabin nuevo = new Cabin(name);
+    public void create(@RequestBody Cabin nuevo){
         this.daoCabin.save(nuevo);
     }
     @DeleteMapping(value = "/{id}")

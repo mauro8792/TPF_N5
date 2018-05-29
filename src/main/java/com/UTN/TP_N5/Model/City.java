@@ -20,7 +20,7 @@ public class City {
     private Long id;
 
     @NotBlank
-    @Column(name = "iata")
+    @Column(name = "iata", unique = true)
     private String iata; //Ejemplo MDQ, EZE,
 
     @NotBlank

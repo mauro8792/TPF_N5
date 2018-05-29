@@ -16,20 +16,17 @@ public class CountryController {
     private Country country;
 
     @PostMapping(value = "/")
-    public void create(String name, String iso){
-        Country nuevo = new Country(name,iso);
+    public void create(@RequestBody Country nuevo){
         this.daoCountry.save(nuevo);
     }
-
-    @DeleteMapping (value = "/{id}")
-    public void deleteCountryForName(@PathVariable("id") Long id){
-        Country pais = daoCountry.findById(id).get();
+    @DeleteMapping (value = "/{iso}")
+    public void deleteCountryForIso(@PathVariable("iso") String iso){
+        Country pais = daoCountry.findByIso(iso);
         daoCountry.delete(pais);
     }
-
-    @GetMapping(value = "/{id}",produces = "application/json")
-    public Country getById(@PathVariable("id") Long id){
-        Country pais = daoCountry.findById(id).get();
+    @GetMapping(value = "/{iso}",produces = "application/json")
+    public Country getById(@PathVariable("iso") String iso){
+        Country pais = daoCountry.findByIso(iso);
         return pais;
     }
     @GetMapping(value = "/")

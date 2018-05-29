@@ -26,31 +26,19 @@ public class AirportController {
         List <Airport> airports = (List<Airport>) this.daoAirport.findAll();
         return airports;
     }
-    @GetMapping(value = "/{id}",produces = "application/json")
-    public Airport getById(@PathVariable("id") Long id){
+    @GetMapping(value = "/{iata}",produces = "application/json")
+    public Airport getByIata(@PathVariable("iata") String iata){
         Airport avion = new Airport();
-        avion = daoAirport.findById(id).get();
+        avion = daoAirport.findByIata(iata);
         return avion;
     }
-
-
     @PostMapping(value = "/")
     public void create(@RequestBody Airport airport){
-        /*City aeroCity = this.daoCity.findById(fk).get();
-        Float lati = Float.parseFloat(lat);
-        Float longi = Float.parseFloat(longitud);
-        Airport nuevo = new Airport(name,iata,aeroCity,lati,longi);*/
         this.daoAirport.save(airport);
     }
-    @DeleteMapping(value = "/{name}")
-    public void deleteAirportForName(String name){
-        Airport airport = new Airport(name);
+    @DeleteMapping(value = "/{iata}")
+    public void deleteAirportForIata(String name){
+        Airport airport = this.daoAirport.findByIata(name);
         this.daoAirport.delete(airport);
     }
-
-
-
-
-
-
 }

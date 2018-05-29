@@ -6,9 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DaoCountry extends JpaRepository<Country,Long> {
-    /*
-
-    @Query("SELECT id_country FROM Countries c WHERE c.id_country=id")
-    List<Country> findOne(Long id);
-*/
+    Country findByIso(String iso);
 }

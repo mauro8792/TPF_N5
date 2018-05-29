@@ -26,12 +26,11 @@ public class Airport {
     private String nombre;
 
     @NotBlank
-    @Column(name = "iata")
+    @Column(name = "iata", unique = true)
     private String iata; //Ejemplo MDQ, EZE, MDZ
 
     @OneToOne
-    //@JoinColumn(name = "id_city", foreignKey = @ForeignKey(name = "fk_id_city"))
-    private City fk;
+    private City ciudad;
 
     @Column(name = "lat")
     @JsonProperty(value = "lat")
@@ -44,10 +43,10 @@ public class Airport {
 
 
 
-    public Airport(String name, String iata, City fk, float lat, float longitud){
+    public Airport(String name, String iata, City ciudad, float lat, float longitud){
         this.nombre=name;
         this.iata=iata;
-        this.fk=fk;
+        this.ciudad=ciudad;
         this.lat=lat;
         this.longitud=longitud;
 

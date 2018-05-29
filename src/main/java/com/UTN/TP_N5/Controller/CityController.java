@@ -20,19 +20,12 @@ public class CityController {
     private DaoCountry daoCountry;
 
     @PostMapping(value = "/")
-    public void create(String name, String iata, Long idP){
-        Country pais = this.daoCountry.findById(idP).get();
-        City nuevo = new City(name,iata, pais);
+    public void create(@RequestBody City nuevo){
         this.daocity.save(nuevo);
     }
-    /*@GetMapping(value = "/getById/{id}", produces = "application/json")
-    public City getById(@PathVariable("id") Long id){
-        City ciu = this.daocity.findById(id).get();
-        return ciu;
-    }*/
-    @GetMapping(value = "/{name}", produces = "application/json")
-    public City getByName(@PathVariable("name") String name){
-        City rtn = this.daocity.findByName(name);
+    @GetMapping(value = "/{iata}", produces = "application/json")
+    public City getByName(@PathVariable("iata") String iata){
+        City rtn = this.daocity.findByIata(iata);
         //City rtn = daocity.findById(id).get();
         return rtn;
     }
@@ -41,7 +34,7 @@ public class CityController {
         List <City> ciudades = (List<City>) this.daocity.findAll();
         return ciudades;
     }
-    @DeleteMapping (value = "/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     public void deleteCityId(@PathVariable("id") Long id){
         City ciudad = daocity.findById(id).get();
         daocity.delete(ciudad);
