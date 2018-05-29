@@ -31,35 +31,7 @@ public class CountryController {
     }
     @GetMapping(value = "/")
     public List getAllCountrie(){
-        List <Country> ciudades = (List<Country>) this.daoCountry.findAll();
-        return ciudades;
-    }
-
-    /*
-        falta ahcer el @PutMapping
-
-     */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
-    public List getAllCountries() {
         List<Country> countries = (List<Country>) this.daoCountry.findAll();
         return countries;
     }
-    /*
-
-    */
 }

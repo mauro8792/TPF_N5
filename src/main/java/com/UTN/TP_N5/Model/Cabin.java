@@ -1,5 +1,6 @@
 package com.UTN.TP_N5.Model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @Entity
-@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "Cabins")
 public class Cabin {
     @Id
@@ -22,7 +23,7 @@ public class Cabin {
     @Column(name = "name")
     private String nombre;
 
-    public Cabin(String name){
+    /*public Cabin(String name){
         this.nombre=name;
-    }
+    }*/
 }

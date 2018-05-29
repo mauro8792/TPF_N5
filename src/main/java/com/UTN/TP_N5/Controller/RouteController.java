@@ -20,13 +20,7 @@ public class RouteController  {
     private DaoCity daoCity;
 
     @PostMapping(value = "/")
-    public void create(Long origin, Long destination, String distance){
-        City origen = this.daoCity.findById(origin).get();
-        City destino = this.daoCity.findById(destination).get();
-        Float distancia = Float.parseFloat(distance);
-        Routes nuevo = new Routes(origen,destino,distancia);
-        this.daoRoute.save(nuevo);
-    }
+    public void create(@RequestBody Routes nuevo){ this.daoRoute.save(nuevo); }
     @DeleteMapping(value = "/{id}")
     public void deleteRouteForId(@PathVariable("id") Long id){
         Routes ruta = daoRoute.findById(id).get();

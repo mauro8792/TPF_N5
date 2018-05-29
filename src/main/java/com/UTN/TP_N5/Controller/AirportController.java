@@ -16,10 +16,8 @@ public class AirportController {
 
     @Autowired
     private DaoAirport daoAirport;
-
     @Autowired
     private DaoCity daoCity;
-
 
     @GetMapping(value = "/",produces = "application/json")
     public List getAllAirports(){
@@ -28,8 +26,7 @@ public class AirportController {
     }
     @GetMapping(value = "/{iata}",produces = "application/json")
     public Airport getByIata(@PathVariable("iata") String iata){
-        Airport avion = new Airport();
-        avion = daoAirport.findByIata(iata);
+        Airport avion = daoAirport.findByIata(iata);
         return avion;
     }
     @PostMapping(value = "/")

@@ -26,7 +26,6 @@ public class CityController {
     @GetMapping(value = "/{iata}", produces = "application/json")
     public City getByName(@PathVariable("iata") String iata){
         City rtn = this.daocity.findByIata(iata);
-        //City rtn = daocity.findById(id).get();
         return rtn;
     }
     @GetMapping(value = "/", produces = "application/json")
