@@ -1,5 +1,6 @@
 package com.UTN.TP_N5.Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -32,12 +33,12 @@ public class Airport {
     //@JoinColumn(name = "id_city", foreignKey = @ForeignKey(name = "fk_id_city"))
     private City fk;
 
-    @NotBlank
     @Column(name = "lat")
+    @JsonProperty(value = "lat")
     private float lat;
 
-    @NotBlank
     @Column(name = "longitud")
+    @JsonProperty(value = "longitud")
     private float longitud;
 
 

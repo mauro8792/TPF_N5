@@ -25,14 +25,14 @@ public class City {
 
     @NotBlank
     @Column(name = "name")
-    private String nombre;
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "fk_id_country")
     private Country fk;
 
     public City(String Name, String Iata, Country fk){
-        this.nombre=Name;
+        this.name=Name;
         this.iata=Iata;
         this.fk=fk;
     }

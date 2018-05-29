@@ -25,14 +25,14 @@ public class CityController {
         City nuevo = new City(name,iata, pais);
         this.daocity.save(nuevo);
     }
-    @GetMapping(value = "/getById/{id}", produces = "application/json")
+    /*@GetMapping(value = "/getById/{id}", produces = "application/json")
     public City getById(@PathVariable("id") Long id){
         City ciu = this.daocity.findById(id).get();
         return ciu;
-    }
-    @GetMapping(value = "/getByName/{name}", produces = "aplication/json")
+    }*/
+    @GetMapping(value = "/{name}", produces = "application/json")
     public City getByName(@PathVariable("name") String name){
-        City rtn = daocity.getByName(name);
+        City rtn = this.daocity.findByName(name);
         //City rtn = daocity.findById(id).get();
         return rtn;
     }

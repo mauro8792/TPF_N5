@@ -21,13 +21,13 @@ public class CountryController {
         this.daoCountry.save(nuevo);
     }
 
-    @DeleteMapping (value = "/getById/{id}")
+    @DeleteMapping (value = "/{id}")
     public void deleteCountryForName(@PathVariable("id") Long id){
         Country pais = daoCountry.findById(id).get();
         daoCountry.delete(pais);
     }
 
-    @GetMapping(value = "/delete/{id}",produces = "application/json")
+    @GetMapping(value = "/{id}",produces = "application/json")
     public Country getById(@PathVariable("id") Long id){
         Country pais = daoCountry.findById(id).get();
         return pais;

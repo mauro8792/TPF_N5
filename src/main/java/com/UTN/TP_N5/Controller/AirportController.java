@@ -3,6 +3,7 @@ package com.UTN.TP_N5.Controller;
 import com.UTN.TP_N5.Model.Airport;
 import com.UTN.TP_N5.Model.City;
 import com.UTN.TP_N5.Repository.DaoAirport;
+import com.UTN.TP_N5.Repository.DaoCity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +17,8 @@ public class AirportController {
     @Autowired
     private DaoAirport daoAirport;
 
-
-    private Airport airport;
+    @Autowired
+    private DaoCity daoCity;
 
 
     @GetMapping(value = "/",produces = "application/json")
@@ -34,9 +35,12 @@ public class AirportController {
 
 
     @PostMapping(value = "/")
-    public void create(String name, String iata, City fk, float lat, float longitud){
-        Airport nuevo = new Airport(name,iata,fk,lat,longitud);
-        this.daoAirport.save(nuevo);
+    public void create(@RequestBody Airport airport){
+        /*City aeroCity = this.daoCity.findById(fk).get();
+        Float lati = Float.parseFloat(lat);
+        Float longi = Float.parseFloat(longitud);
+        Airport nuevo = new Airport(name,iata,aeroCity,lati,longi);*/
+        this.daoAirport.save(airport);
     }
     @DeleteMapping(value = "/{name}")
     public void deleteAirportForName(String name){
