@@ -30,11 +30,12 @@ public class CityController {
         City ciu = this.daocity.findById(id).get();
         return ciu;
     }
-    /*@GetMapping(value = "/getByName/", produces = "aplication/json")
-    public City getByName(String name){
-        City rtn = this.daocity.findByIata(name);
+    @GetMapping(value = "/getByName/{name}", produces = "aplication/json")
+    public City getByName(@PathVariable("name") String name){
+        City rtn = daocity.getByName(name);
+        //City rtn = daocity.findById(id).get();
         return rtn;
-    }*/
+    }
     @GetMapping(value = "/", produces = "application/json")
     public List getAllCities(){
         List <City> ciudades = (List<City>) this.daocity.findAll();

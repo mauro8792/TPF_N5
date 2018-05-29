@@ -29,8 +29,7 @@ public class CountryController {
 
     @GetMapping(value = "/delete/{id}",produces = "application/json")
     public Country getById(@PathVariable("id") Long id){
-        Country pais = new Country();
-        pais = daoCountry.findById(id).get();
+        Country pais = daoCountry.findById(id).get();
         return pais;
     }
     @GetMapping(value = "/")

@@ -8,5 +8,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DaoCity extends JpaRepository<City, Long> {
-
+    @Query("SELECT id_city" +
+            "FROM cities" +
+            "WHERE name = :name")
+    City getByName(@Param("name") String name);
 }
