@@ -40,9 +40,6 @@ public class Airport {
     @JsonProperty(value = "longitud")
     private float longitud;
 
-
-
-
     public Airport(String name, String iata, City ciudad, float lat, float longitud){
         this.nombre=name;
         this.iata=iata;

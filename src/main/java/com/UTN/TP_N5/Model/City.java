@@ -29,12 +29,12 @@ public class City {
 
     @ManyToOne
     @JoinColumn(name = "fk_id_country")
-    private Country fk;
+    private Country country;
 
     public City(String Name, String Iata, Country fk){
         this.name=Name;
         this.iata=Iata;
-        this.fk=fk;
+        this.country=fk;
     }
     public City(Long Id){
         this.id=Id;

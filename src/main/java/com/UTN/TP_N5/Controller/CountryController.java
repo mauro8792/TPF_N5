@@ -2,6 +2,7 @@ package com.UTN.TP_N5.Controller;
 
 import com.UTN.TP_N5.Model.Country;
 import com.UTN.TP_N5.Repository.DaoCountry;
+import com.UTN.TP_N5.Services.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,14 +13,13 @@ import java.util.List;
 public class CountryController {
 
     @Autowired
-    private DaoCountry daoCountry;
-    private Country country;
+    private CountryService daoCountry;
 
     @PostMapping(value = "/")
     public void create(@RequestBody Country nuevo){
-        this.daoCountry.save(nuevo);
+        this.daoCountry.guardar(nuevo);
     }
-    @DeleteMapping (value = "/{iso}")
+    /*@DeleteMapping (value = "/{iso}")
     public void deleteCountryForIso(@PathVariable("iso") String iso){
         Country pais = daoCountry.findByIso(iso);
         daoCountry.delete(pais);
@@ -33,5 +33,5 @@ public class CountryController {
     public List getAllCountrie(){
         List<Country> countries = (List<Country>) this.daoCountry.findAll();
         return countries;
-    }
+    }*/
 }
