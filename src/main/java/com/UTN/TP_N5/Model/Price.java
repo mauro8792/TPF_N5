@@ -25,5 +25,5 @@ public class Price {
 
     @Column(name = "desde")
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date date;
+    private Date desde;
 }

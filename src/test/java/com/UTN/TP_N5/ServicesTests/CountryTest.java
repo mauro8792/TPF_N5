@@ -32,5 +32,9 @@ public class CountryTest {
         Boolean res = this.countryService.guardar(this.country);
         assertEquals(java.util.Optional.of(true),res);
     }
+    @Test
+    public void deleteTest(){
+        assertTrue(this.countryService.eliminar(this.country.getIso()));
+    }
 
 }

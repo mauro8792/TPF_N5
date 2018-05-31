@@ -18,13 +18,17 @@ public class AirportController {
 
     @Autowired
     private DaoAirport daoAirport;
-    @Autowired
-    private DaoCity daoCity;
 
     @GetMapping(value = "/",produces = "application/json")
     public List getAllAirports(){
-        List <AirportDTO> airports = null;//this.daoAirport.findAll();
-        return airports;
+        List <Airport> airports = this.daoAirport.findAll();
+        List <AirportDTO> airportDTOS = new ArrayList<>();
+        for (Airport airport: airports) {
+            AirportDTO airportDTO = new AirportDTO();
+            modelMapper.map(airport,airportDTO);
+            airportDTOS.add(airportDTO);
+        }
+        return airportDTOS;
     }
     @GetMapping(value = "/{iata}",produces = "application/json")
     public AirportDTO getByIata(@PathVariable("iata") String iata){

@@ -2,11 +2,15 @@ package com.UTN.TP_N5.Controller;
 
 import com.UTN.TP_N5.Model.Price;
 import com.UTN.TP_N5.Repository.DaoPrice;
+import com.UTN.TP_N5.dto.PriceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.UTN.TP_N5.TpN5Application.modelMapper;
 
 @RestController
 @RequestMapping("/price")
@@ -21,7 +25,13 @@ public class PriceController {
     @GetMapping(value = "/", produces = "application/json")
     public List getAll(){
         List <Price> prices = this.daoPrice.findAll();
-        return  prices;
+        List <PriceDTO> priceDTOS = new ArrayList<>();
+        for(Price price : prices){
+            PriceDTO priceDTO = new PriceDTO();
+            modelMapper.map(price,priceDTO);
+            priceDTOS.add(priceDTO);
+        }
+        return priceDTOS;
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")

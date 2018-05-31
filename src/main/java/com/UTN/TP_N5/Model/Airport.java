@@ -3,9 +3,7 @@ package com.UTN.TP_N5.Model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -33,18 +31,18 @@ public class Airport {
     private City ciudad;
 
     @Column(name = "lat")
-    @JsonProperty(value = "lat")
-    private float lat;
+    @JsonProperty(value = "latitude")
+    private float latitude;
 
     @Column(name = "longitud")
     @JsonProperty(value = "longitud")
     private float longitud;
 
-    public Airport(String name, String iata, City ciudad, float lat, float longitud){
+    public Airport(String name, String iata, City ciudad, float latitude, float longitud){
         this.nombre=name;
         this.iata=iata;
         this.ciudad=ciudad;
-        this.lat=lat;
+        this.latitude = latitude;
         this.longitud=longitud;
 
     }

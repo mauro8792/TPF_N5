@@ -36,7 +36,13 @@ public class CityController {
     @GetMapping(value = "/", produces = "application/json")
     public List getAllCities(){
         List <City> ciudades = (List<City>) this.daocity.getAllCity();
-        return ciudades;
+        List <CityDTO> ciudadesDTO = new ArrayList<>();
+        for (City ciudad: ciudades) {
+            CityDTO cityDTO = new CityDTO();
+            modelMapper.map(ciudad,cityDTO);
+            ciudadesDTO.add(cityDTO);
+        }
+        return ciudadesDTO;
     }
     @DeleteMapping(value = "/{iata}")
     public void deleteCityForIata(@PathVariable("iata") String iata){
