@@ -29,8 +29,8 @@ public class CountryTest {
 
     @Test
     public void saveTest(){
-        String res = this.countryService.guardar(this.country);
-        assertEquals("Carga exitosa",res);
+        Boolean res = this.countryService.guardar(this.country);
+        assertEquals(java.util.Optional.of(true),res);
     }
 
 }

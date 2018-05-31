@@ -5,11 +5,15 @@ import com.UTN.TP_N5.Model.Country;
 import com.UTN.TP_N5.Repository.DaoCity;
 import com.UTN.TP_N5.Repository.DaoCountry;
 import com.UTN.TP_N5.Services.CityService;
+import com.UTN.TP_N5.dto.CityDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.UTN.TP_N5.TpN5Application.modelMapper;
 
 @RestController
 @RequestMapping(value = "/city")
@@ -24,8 +28,9 @@ public class CityController {
     }
 
     @GetMapping(value = "/{iata}", produces = "application/json")
-    public City getByName(@PathVariable("iata") String iata){
-        City rtn = this.daocity.getByIata(iata);
+    public CityDTO getByName(@PathVariable("iata") String iata){
+        CityDTO rtn = new CityDTO();
+        modelMapper.map(this.daocity.getByIata(iata),rtn);
         return rtn;
     }
     @GetMapping(value = "/", produces = "application/json")

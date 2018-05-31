@@ -41,7 +41,7 @@ public class CityService {
         return rtn;
     }
     public City getByIata (String iata){
-        City mostrar=null;
+        City mostrar = null;
         try {
             mostrar=this.daoCity.findByIata(iata);
         }catch (Exception e){
