@@ -9,4 +9,7 @@ public class TpN5Application {
 	public static void main(String[] args) {
 		SpringApplication.run(TpN5Application.class, args);
 	}
+
+    public static class CityService {
+    }
 }

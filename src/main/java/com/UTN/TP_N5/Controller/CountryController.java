@@ -19,19 +19,21 @@ public class CountryController {
     public void create(@RequestBody Country nuevo){
         this.daoCountry.guardar(nuevo);
     }
-    /*@DeleteMapping (value = "/{iso}")
+
+    @DeleteMapping (value = "/{iso}")
     public void deleteCountryForIso(@PathVariable("iso") String iso){
-        Country pais = daoCountry.findByIso(iso);
-        daoCountry.delete(pais);
+        this.daoCountry.eliminar(iso);
     }
+
     @GetMapping(value = "/{iso}",produces = "application/json")
     public Country getById(@PathVariable("iso") String iso){
-        Country pais = daoCountry.findByIso(iso);
+        Country pais = this.daoCountry.getByIso(iso);
         return pais;
     }
+
     @GetMapping(value = "/")
     public List getAllCountrie(){
-        List<Country> countries = (List<Country>) this.daoCountry.findAll();
+        List<Country> countries = this.daoCountry.getAllCountry();
         return countries;
-    }*/
+    }
 }

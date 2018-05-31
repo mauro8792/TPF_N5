@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @NoArgsConstructor
 public class CountryService {
@@ -16,14 +19,48 @@ public class CountryService {
     public CountryService(DaoCountry daoCountry){
         this.daoCountry = daoCountry;
     }
-    public String guardar(Country nuevo){
-        String rtn = "Error en la carga";
+
+    public Boolean guardar(Country nuevo){
+        Boolean rtn = false;
         try {
-            this.daoCountry.save(nuevo);
-            rtn = "Carga exitosa";
+            if (this.daoCountry.save(nuevo)!=null){
+                rtn = true;
+            }
         }catch (Exception e){
 
         }
         return rtn;
     }
+
+    public Boolean eliminar (String eliminar){
+        Boolean rtn = false;
+        try {
+            Country del = this.daoCountry.findByIso(eliminar);
+            this.daoCountry.delete(del);
+            rtn = true;
+        }catch (Exception e){
+
+        }
+        return rtn;
+     }
+
+    public  Country getByIso(String iso){
+        Country mostrar=null;
+        try{
+             mostrar = this.getByIso(iso);
+
+        }catch (Exception e){
+        }
+        return  mostrar;
+    }
+    public List getAllCountry (){
+        List<Country> countries=null;
+        try {
+            countries=this.daoCountry.findAll();
+        }catch (Exception e){
+
+        }
+        return countries;
+    }
+
 }
