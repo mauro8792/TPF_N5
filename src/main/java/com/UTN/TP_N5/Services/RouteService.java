@@ -1,7 +1,6 @@
 package com.UTN.TP_N5.Services;
 
 import com.UTN.TP_N5.Model.Routes;
-import com.UTN.TP_N5.Repository.DaoPrice;
 import com.UTN.TP_N5.Repository.DaoRoute;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,7 @@ public class RouteService {
         Boolean rtn = false;
         try {
             //probar si anda OJOOOO!!!
-            Routes del = this.daoRoute.findByIdd(Id);
+            Routes del = this.daoRoute.findById(Id).get();
             this.daoRoute.delete(del);
             rtn = true;
         }catch (Exception e){
@@ -47,7 +46,7 @@ public class RouteService {
     public  Routes getById(Long Id){
         Routes mostrar = null;
         try{
-            mostrar = this.daoRoute.findByIdd(Id);
+            mostrar = this.daoRoute.findById(Id).get();
 
         }catch (Exception e){
         }

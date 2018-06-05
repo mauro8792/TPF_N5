@@ -1,15 +1,10 @@
 package com.UTN.TP_N5.Controller;
 
 import com.UTN.TP_N5.Model.City;
-import com.UTN.TP_N5.Model.Country;
-import com.UTN.TP_N5.Repository.DaoCity;
-import com.UTN.TP_N5.Repository.DaoCountry;
 import com.UTN.TP_N5.Services.CityService;
 import com.UTN.TP_N5.dto.CityDTO;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 

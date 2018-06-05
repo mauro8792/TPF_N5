@@ -10,20 +10,17 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-@Entity
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity
 @Table(name = "Cabins")
 public class Cabin {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_cabin")
     private int id;
 
     @NotBlank
     @Column(name = "name")
     private String nombre;
-
-    /*public Cabin(String name){
-        this.nombre=name;
-    }*/
 }

@@ -5,8 +5,6 @@ import com.UTN.TP_N5.Repository.DaoPrice;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.Id;
 import java.util.List;
 
 @Service
@@ -34,7 +32,7 @@ public class PriceService {
         Boolean rtn = false;
         try {
             //probar si anda OJOOOO!!!
-            Price del = this.daoPrice.findByIdd(Id);
+            Price del = this.daoPrice.findById(Id).get();
             this.daoPrice.delete(del);
             rtn = true;
         }catch (Exception e){
@@ -46,7 +44,7 @@ public class PriceService {
     public  Price getById(Long Id){
         Price mostrar = null;
         try{
-            mostrar = this.daoPrice.findByIdd(Id);
+            mostrar = this.daoPrice.findById(Id).get();
 
         }catch (Exception e){
         }

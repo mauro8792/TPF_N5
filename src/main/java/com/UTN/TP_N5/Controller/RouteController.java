@@ -2,21 +2,15 @@ package com.UTN.TP_N5.Controller;
 
 
 import com.UTN.TP_N5.Model.Airport;
-import com.UTN.TP_N5.Model.City;
 import com.UTN.TP_N5.Model.Routes;
-import com.UTN.TP_N5.Repository.DaoAirport;
-import com.UTN.TP_N5.Repository.DaoCity;
-import com.UTN.TP_N5.Repository.DaoRoute;
 import com.UTN.TP_N5.Services.AirportService;
 import com.UTN.TP_N5.Services.RouteService;
 import com.UTN.TP_N5.dto.RouteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.UTN.TP_N5.TpN5Application.modelMapper;
 
 @RestController
 @RequestMapping("/routes")
@@ -53,8 +47,7 @@ public class RouteController  {
         List <Routes> rutas = (List<Routes>) this.daoRoute.getAllRoutes();
         List <RouteDTO> rutasDTO = new ArrayList<>();
         for (Routes ruta: rutas){
-            RouteDTO routeDTO = new RouteDTO();
-            modelMapper.map(ruta,routeDTO);
+            RouteDTO routeDTO = new RouteDTO(ruta);
             rutasDTO.add(routeDTO);
         }
         return rutasDTO;

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Getter
@@ -26,4 +25,7 @@ public class Price {
     @Column(name = "desde")
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date desde;
+
+    @OneToOne
+    private RouteXCabin routeXCabins;
 }

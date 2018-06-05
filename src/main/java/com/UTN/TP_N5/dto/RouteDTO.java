@@ -2,23 +2,21 @@ package com.UTN.TP_N5.dto;
 
 import com.UTN.TP_N5.Model.Routes;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import static com.UTN.TP_N5.TpN5Application.modelMapper;
+
 
 @Getter
 @Setter
-@NoArgsConstructor
 public class RouteDTO {
-    AirportDTO origin;
-    AirportDTO destination;
-    float distance;
+    private AirportDTO origin;
+    private AirportDTO destination;
+    private float distance;
 
     public RouteDTO(Routes routes){
-        origin = new AirportDTO();
+        this.origin = new AirportDTO();
+        this.destination = new AirportDTO();
         modelMapper.map(routes.getDestination(),this.destination);
-        destination = new AirportDTO();
         modelMapper.map(routes.getOrigin(),this.origin);
         this.distance = routes.getDistance();
     }

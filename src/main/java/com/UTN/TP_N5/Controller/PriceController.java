@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.UTN.TP_N5.TpN5Application.modelMapper;
-
 @RestController
 @RequestMapping("/price")
 public class PriceController {
@@ -27,15 +25,14 @@ public class PriceController {
         List <Price> prices = this.daoPrice.getAllPrice();
         List <PriceDTO> priceDTOS = new ArrayList<>();
         for(Price price : prices){
-            PriceDTO priceDTO = new PriceDTO();
-            modelMapper.map(price,priceDTO);
+            PriceDTO priceDTO = new PriceDTO(price);
             priceDTOS.add(priceDTO);
         }
         return priceDTOS;
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")
-    public Price getById(@Param("id")Long id){
+    public Price getById(@PathVariable("id")Long id){
         Price rtn = this.daoPrice.getById(id);
         return rtn;
     }
