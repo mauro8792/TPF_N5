@@ -1,52 +1,48 @@
 package com.UTN.TP_N5.Controller;
 
 import com.UTN.TP_N5.Model.Airport;
-import com.UTN.TP_N5.Model.City;
 import com.UTN.TP_N5.Repository.DaoAirport;
+import com.UTN.TP_N5.Repository.DaoCity;
+import com.UTN.TP_N5.Services.AirportService;
+import com.UTN.TP_N5.dto.AirportDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
+import static com.UTN.TP_N5.TpN5Application.modelMapper;
+
 @RestController
-@RequestMapping("/airports")
+@RequestMapping("/airport")
 public class AirportController {
 
     @Autowired
-    private DaoAirport daoAirport;
-
-
-    private Airport airport;
-
+    private AirportService daoAirport;
 
     @GetMapping(value = "/",produces = "application/json")
     public List getAllAirports(){
-        List <Airport> airports = (List<Airport>) this.daoAirport.findAll();
-        return airports;
+        List <Airport> airports = this.daoAirport.getAllAirports();
+        List <AirportDTO> airportDTOS = new ArrayList<>();
+        for (Airport airport: airports) {
+            AirportDTO airportDTO = new AirportDTO();
+            modelMapper.map(airport,airportDTO);
+            airportDTOS.add(airportDTO);
+        }
+        return airportDTOS;
     }
-    @GetMapping(value = "/{id}",produces = "application/json")
-    public Airport getById(@PathVariable("id") Long id){
-        Airport avion = new Airport();
-        avion = daoAirport.findById(id).get();
+    @GetMapping(value = "/{iata}",produces = "application/json")
+    public AirportDTO getByIata(@PathVariable("iata") String iata){
+        AirportDTO avion = new AirportDTO();
+        modelMapper.map(this.daoAirport.getByIata(iata),avion);
         return avion;
     }
-
-
     @PostMapping(value = "/")
-    public void create(String name, String iata, City fk, float lat, float longitud){
-        Airport nuevo = new Airport(name,iata,fk,lat,longitud);
-        this.daoAirport.save(nuevo);
+    public void create(@RequestBody Airport airport){
+        this.daoAirport.guardar(airport);
     }
-    @DeleteMapping(value = "/{name}")
-    public void deleteAirportForName(String name){
-        Airport airport = new Airport(name);
-        this.daoAirport.delete(airport);
+    @DeleteMapping(value = "/{iata}")
+    public void deleteAirportForIata(String name){
+        this.daoAirport.eliminar(name);
     }
-
-
-
-
-
-
 }

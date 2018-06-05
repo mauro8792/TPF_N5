@@ -24,7 +24,7 @@ public class Country {
     private String name;
 
     @NotBlank
-    @Column(name = "iso")
+    @Column(name = "iso", unique = true)
     private String iso; //Ejemplo AR,BR,URU
 
     public Country(String name,String iso){

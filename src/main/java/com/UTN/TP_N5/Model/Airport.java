@@ -1,11 +1,9 @@
 package com.UTN.TP_N5.Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
@@ -25,33 +23,30 @@ public class Airport {
     private String nombre;
 
     @NotBlank
-    @Column(name = "iata")
+    @Column(name = "iata", unique = true)
     private String iata; //Ejemplo MDQ, EZE, MDZ
 
     @OneToOne
-    @JoinColumn(name = "id_city", foreignKey = @ForeignKey(name = "fk_id_city"))
-    private City fk;
+    private City ciudad;
 
-    @NotBlank
     @Column(name = "lat")
-    private float lat;
+    @JsonProperty(value = "latitude")
+    private float latitude;
 
-    @NotBlank
     @Column(name = "longitud")
+    @JsonProperty(value = "longitud")
     private float longitud;
 
-
-
-
-    public Airport(String name, String iata, City fk, float lat, float longitud){
+    public Airport(String name, String iata, City ciudad, float latitude, float longitud){
         this.nombre=name;
         this.iata=iata;
-        this.fk=fk;
-        this.lat=lat;
+        this.ciudad=ciudad;
+        this.latitude = latitude;
         this.longitud=longitud;
 
     }
-    public Airport(String name){
+    public Airport(String iata,String name){
         this.nombre=name;
+        this.iata = iata;
     }
 }

@@ -20,20 +20,21 @@ public class City {
     private Long id;
 
     @NotBlank
-    @Column(name = "iata")
+    @Column(name = "iata", unique = true)
     private String iata; //Ejemplo MDQ, EZE,
 
     @NotBlank
     @Column(name = "name")
-    private String nombre;
+    private String name;
 
     @ManyToOne
-    private Country fk;
+    @JoinColumn(name = "fk_id_country")
+    private Country country;
 
     public City(String Name, String Iata, Country fk){
-        this.nombre=Name;
+        this.name=Name;
         this.iata=Iata;
-        this.fk=fk;
+        this.country=fk;
     }
     public City(Long Id){
         this.id=Id;

@@ -1,7 +1,7 @@
 package com.UTN.TP_N5.Model;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,6 +9,9 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@RequiredArgsConstructor
+
 @Table(name = "Prices")
 public class Price {
     @Id
@@ -20,5 +23,9 @@ public class Price {
     private int price;
 
     @Column(name = "desde")
-    private Date date;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private Date desde;
+
+    @OneToOne
+    private RouteXCabin routeXCabins;
 }
