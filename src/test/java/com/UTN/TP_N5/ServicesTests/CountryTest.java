@@ -36,5 +36,9 @@ public class CountryTest {
     public void deleteTest(){
         assertTrue(this.countryService.eliminar(this.country.getIso()));
     }
+    @Test
+    public void deleteTest(){
+        assertTrue(this.countryService.eliminar(this.country.getIso()));
+    }
 
 }
