@@ -2,14 +2,11 @@ package com.UTN.TP_N5.Controller;
 
 import com.UTN.TP_N5.Model.City;
 import com.UTN.TP_N5.Model.Country;
-import com.UTN.TP_N5.Repository.DaoCity;
-import com.UTN.TP_N5.Repository.DaoCountry;
 import com.UTN.TP_N5.Services.CityService;
+import com.UTN.TP_N5.Services.CountryService;
 import com.UTN.TP_N5.dto.CityDTO;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +18,16 @@ public class CityController {
 
     @Autowired
     private CityService daocity;
+    @Autowired
+    private CountryService daoCountry;
 
     @PostMapping(value = "/")
-    public void create(@RequestBody City nuevo){
-        this.daocity.guardar(nuevo);
+    public void create(@RequestBody CityDTO nuevo){
+        Country country = daoCountry.getByIso(nuevo.getCountry().getIso());
+        if(country != null) {
+            City city = new City(nuevo.getName(), nuevo.getIata(), country);
+            this.daocity.guardar(city);
+        }
     }
 
     @GetMapping(value = "/{iata}", produces = "application/json")
@@ -36,7 +39,13 @@ public class CityController {
     @GetMapping(value = "/", produces = "application/json")
     public List getAllCities(){
         List <City> ciudades = (List<City>) this.daocity.getAllCity();
-        return ciudades;
+        List <CityDTO> ciudadesDTO = new ArrayList<>();
+        for (City ciudad: ciudades) {
+            CityDTO cityDTO = new CityDTO();
+            modelMapper.map(ciudad,cityDTO);
+            ciudadesDTO.add(cityDTO);
+        }
+        return ciudadesDTO;
     }
     @DeleteMapping(value = "/{iata}")
     public void deleteCityForIata(@PathVariable("iata") String iata){

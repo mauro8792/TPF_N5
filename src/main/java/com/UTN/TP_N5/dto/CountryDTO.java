@@ -1,7 +1,6 @@
 package com.UTN.TP_N5.dto;
 
 import com.UTN.TP_N5.Model.Country;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

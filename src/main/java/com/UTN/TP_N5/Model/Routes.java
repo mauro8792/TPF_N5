@@ -1,39 +1,41 @@
 package com.UTN.TP_N5.Model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
-@Entity
+@AllArgsConstructor
 @NoArgsConstructor
+@Entity
 @Table(name = "Routes")
 public class Routes {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "id_route")
     private Long id;
 
     @OneToOne
-    private City origin;
+    private Airport origin;
 
     @OneToOne
-    private City destination;
+    private Airport destination;
 
     @Column(name = "distance")
     private float distance;
 
-    public Routes (City origin, City destination, float distance){
-        this.origin=origin;
-        this.destination=destination;
-        this.distance=distance;
-    }
-    public Routes(Long id){
-        this.id=id;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "route")
+    private List<RouteXCabin> cabinas= new ArrayList<>();
+
+    public Routes(Airport origin, Airport destination,float distance){
+        this.destination = destination;
+        this.distance = distance;
+        this.origin = origin;
     }
 }

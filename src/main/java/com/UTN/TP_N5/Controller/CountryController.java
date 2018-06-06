@@ -6,6 +6,7 @@ import com.UTN.TP_N5.dto.CountryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.UTN.TP_N5.TpN5Application.modelMapper;
@@ -37,6 +38,12 @@ public class CountryController {
     @GetMapping(value = "/")
     public List getAllCountrie(){
         List<Country> countries = this.daoCountry.getAllCountry();
-        return countries;
+        List<CountryDTO> countryDTOS = new ArrayList<>();
+        for(Country country : countries){
+            CountryDTO countryDTO = new CountryDTO();
+            modelMapper.map(country,countryDTO);
+            countryDTOS.add(countryDTO);
+        }
+        return countryDTOS;
     }
 }

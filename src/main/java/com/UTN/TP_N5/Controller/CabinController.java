@@ -1,7 +1,8 @@
 package com.UTN.TP_N5.Controller;
 
 import com.UTN.TP_N5.Model.Cabin;
-import com.UTN.TP_N5.Repository.DaoCabin;
+import com.UTN.TP_N5.Services.CabinService;
+import com.UTN.TP_N5.dto.CabinDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,25 +13,29 @@ import java.util.List;
 public class CabinController {
 
     @Autowired
-    private DaoCabin daoCabin;
+    private CabinService daoCabin;
 
     @PostMapping(value = "/")
     public void create(@RequestBody Cabin nuevo){
-        this.daoCabin.save(nuevo);
+        this.daoCabin.guardar(nuevo);
     }
-    @DeleteMapping(value = "/{id}")
-    public void deleteCountryForId(@PathVariable("id") Long id){
-        Cabin cabina = daoCabin.findById(id).get();
-        daoCabin.delete(cabina);
+    @DeleteMapping(value = "/{nombre}")
+    public void deleteCabinForName(@PathVariable("nombre") String nombre){
+        daoCabin.eliminar(nombre);
     }
-    @GetMapping(value = "/{id}",produces = "application/json")
-    public Cabin getById(@PathVariable("id") Long id){
-        Cabin pais = daoCabin.findById(id).get();
-        return pais;
+    @GetMapping(value = "/{nombre}",produces = "application/json")
+    public CabinDTO getById(@PathVariable("nombre") String nombre){
+        Cabin cabin = daoCabin.getByNombre(nombre);
+        CabinDTO cabinDTO= new CabinDTO(cabin.getNombre());
+        return cabinDTO;
     }
     @GetMapping(value = "/")
     public List getAllCabins(){
-        List <Cabin> cabinas = (List<Cabin>) this.daoCabin.findAll();
+        List <Cabin> cabinas = (List<Cabin>) this.daoCabin.getAllCabins();
         return cabinas;
+    }
+    @PutMapping(value = "/{id}")
+    public void modifyCabin(@RequestBody CabinDTO cabin,@PathVariable ("id") Long id){
+        this.daoCabin.modifyCabin(cabin, id);
     }
 }
