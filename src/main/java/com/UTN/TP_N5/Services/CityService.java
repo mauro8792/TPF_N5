@@ -21,7 +21,8 @@ public class CityService {
     public Boolean guardar(City nuevo){
         Boolean rtn=false;
         try {
-            if (this.daoCity.save(nuevo)!=null){
+            if (this.daoCity.findByIata(nuevo.getIata())==null){
+                this.daoCity.save(nuevo);
                 rtn = true;
             }
         }catch (Exception e){

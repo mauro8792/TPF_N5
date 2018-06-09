@@ -17,7 +17,7 @@ public class Price {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id_price")
-    private int id;
+    private Long id;
 
     @Column(name = "price")
     private int price;

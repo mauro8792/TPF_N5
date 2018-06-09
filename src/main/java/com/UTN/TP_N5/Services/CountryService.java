@@ -23,7 +23,8 @@ public class CountryService {
     public Boolean guardar(Country nuevo){
         Boolean rtn = false;
         try {
-            if (this.daoCountry.save(nuevo)!=null){
+            if (this.daoCountry.findByIso(nuevo.getIso())==null){
+                this.daoCountry.save(nuevo);
                 rtn = true;
             }
         }catch (Exception e){

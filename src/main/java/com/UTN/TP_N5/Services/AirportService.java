@@ -14,12 +14,14 @@ public class AirportService {
     private DaoAirport daoAirport;
 
     public AirportService (DaoAirport daoAirport){
+
         this.daoAirport=daoAirport;
     }
     public Boolean guardar(Airport nuevo){
         Boolean rtn=false;
         try {
-            if (this.daoAirport.save(nuevo)!=null){
+            if (this.daoAirport.findByIata(nuevo.getIata())==null){
+                this.daoAirport.save(nuevo);
                 rtn = true;
             }
         }catch (Exception e){

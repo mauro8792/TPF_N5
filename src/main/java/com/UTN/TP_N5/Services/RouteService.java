@@ -22,9 +22,8 @@ public class RouteService {
     public Boolean guardar(Routes nuevo){
         Boolean rtn = false;
         try {
-            if (this.daoRoute.save(nuevo)!=null){
-                rtn = true;
-            }
+            this.daoRoute.save(nuevo);
+            rtn = true;
         }catch (Exception e){
 
         }

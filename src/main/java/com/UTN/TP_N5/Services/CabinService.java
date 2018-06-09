@@ -23,7 +23,8 @@ public class CabinService {
     public Boolean guardar(Cabin nuevo){
         Boolean rtn = false;
         try {
-            if (this.daoCabin.save(nuevo)!=null){
+            if (this.daoCabin.findByNombre(nuevo.getNombre())==null){
+                this.daoCabin.save(nuevo);
                 rtn = true;
             }
         }catch (Exception e){
