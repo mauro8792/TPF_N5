@@ -30,7 +30,7 @@ public class Routes {
     @Column(name = "distance")
     private float distance;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "route")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "route", cascade = CascadeType.ALL)
     private List<RouteXCabin> cabinas= new ArrayList<>();
 
     public Routes(Airport origin, Airport destination,float distance){

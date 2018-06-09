@@ -11,6 +11,8 @@ public class TpN5ApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		TpN5Application.main(new String[]{});
 	}
+
 
 }

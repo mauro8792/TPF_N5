@@ -54,8 +54,9 @@ public class AirportController {
         this.daoAirport.eliminar(name);
     }
 
-    @PutMapping(value = "/{id}")
-    public void modifyAirport(@RequestBody Airport airport){
+    @PutMapping(value = "/{iata}")
+    public void modifyAirport(@RequestBody AirportDTO airport, @PathVariable String iata){
+        airport.setIata(iata);
         this.daoAirport.modifyAirport(airport);
 
     }

@@ -10,8 +10,7 @@ import java.util.Date;
 @Setter
 @Entity
 @AllArgsConstructor
-@RequiredArgsConstructor
-
+@NoArgsConstructor
 @Table(name = "Prices")
 public class Price {
     @Id
@@ -22,10 +21,20 @@ public class Price {
     @Column(name = "price")
     private int price;
 
-    @Column(name = "desde")
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date desde;
 
-    @OneToOne
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private Date hasta;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_Rxc")
     private RouteXCabin routeXCabins;
+
+    public Price(int price, Date desde, Date hasta, RouteXCabin rxc){
+        this.price = price;
+        this.desde = desde;
+        this.hasta = hasta;
+        this.routeXCabins = rxc;
+    }
 }

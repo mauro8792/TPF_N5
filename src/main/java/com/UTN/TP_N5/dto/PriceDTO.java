@@ -17,9 +17,13 @@ public class PriceDTO {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date desde;
 
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private Date hasta;
+
     public PriceDTO(Price price){
         this.price = price.getPrice();
         this.desde = price.getDesde();
+        this.hasta = price.getHasta();
         this.addCabinAndRoute(price);
     }
     public void addCabinAndRoute(Price price){

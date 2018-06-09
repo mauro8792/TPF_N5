@@ -1,7 +1,10 @@
 package com.UTN.TP_N5.Services;
 
 import com.UTN.TP_N5.Model.City;
+import com.UTN.TP_N5.Model.Country;
 import com.UTN.TP_N5.Repository.DaoCity;
+import com.UTN.TP_N5.Repository.DaoCountry;
+import com.UTN.TP_N5.dto.CityDTO;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +16,13 @@ import java.util.List;
 public class CityService {
     @Autowired
     private DaoCity daoCity;
+    @Autowired
+    private DaoCountry daoCountry;
 
     public CityService(DaoCity daoCity){
         this.daoCity = daoCity;
     }
+
 
     public Boolean guardar(City nuevo){
         Boolean rtn=false;
@@ -59,5 +65,4 @@ public class CityService {
         }
         return ciudades;
     }
-
 }

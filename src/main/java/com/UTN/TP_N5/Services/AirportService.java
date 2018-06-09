@@ -2,6 +2,7 @@ package com.UTN.TP_N5.Services;
 
 import com.UTN.TP_N5.Model.Airport;
 import com.UTN.TP_N5.Repository.DaoAirport;
+import com.UTN.TP_N5.dto.AirportDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +51,7 @@ public class AirportService {
         return mostrar;
     }
     public List getAllAirports(){
-        List<Airport> aeropuertos=null;
+        List<Airport> aeropuertos = null;
         try {
             aeropuertos=this.daoAirport.findAll();
         }catch (Exception e){
@@ -58,16 +59,15 @@ public class AirportService {
         }
         return aeropuertos;
     }
-    public boolean modifyAirport(Airport airport){
+    public boolean modifyAirport(AirportDTO airport){
         boolean rtn = false;
-        try{
-            Airport airpor = this.getByIata(airport.getIata());
+        Airport airpor = this.getByIata(airport.getIata());
+        if(airport != null) {
             airpor.setLatitude(airport.getLatitude());
             airpor.setLongitud(airport.getLongitud());
             airpor.setNombre(airport.getNombre());
             this.guardar(airpor);
             rtn = true;
-        } catch (Exception e){
         }
         return rtn;
     }

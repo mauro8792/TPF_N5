@@ -1,8 +1,14 @@
 package com.UTN.TP_N5.Controller;
 
+import com.UTN.TP_N5.Model.Cabin;
 import com.UTN.TP_N5.Model.Price;
+import com.UTN.TP_N5.Model.RouteXCabin;
+import com.UTN.TP_N5.Model.Routes;
+import com.UTN.TP_N5.Services.CabinService;
 import com.UTN.TP_N5.Services.PriceService;
+import com.UTN.TP_N5.Services.RouteService;
 import com.UTN.TP_N5.dto.PriceDTO;
+import com.UTN.TP_N5.dto.PriceInDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +23,23 @@ public class PriceController {
     @Autowired
     private PriceService daoPrice;
 
+    @Autowired
+    private RouteService routeService;
+
+    @Autowired
+    private CabinService cabinService;
+
     @PostMapping(value = "/")
-    public void newPrice(@RequestBody Price price){ this.daoPrice.guardar(price); }
+    public void newPrice(@RequestBody PriceInDTO price){
+        Routes route = this.routeService.getById(price.getIdRoute());
+        Cabin cabin = this.cabinService.getCabinID(price.getIdCabin());
+        if(route != null && cabin !=null){
+            RouteXCabin rxc = new RouteXCabin(route,cabin);
+            Price price1 = new Price(price.getPrecio(),price.getDesde(),price.getHasta(),rxc);
+            this.daoPrice.guardar(price1);
+        }
+
+    }
 
     @GetMapping(value = "/", produces = "application/json")
     public List getAll(){
