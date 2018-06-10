@@ -2,6 +2,7 @@ package com.UTN.TP_N5.Services;
 
 import com.UTN.TP_N5.Model.Routes;
 import com.UTN.TP_N5.Repository.DaoRoute;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class RouteService {
     @Autowired
     private DaoRoute daoRoute;
 
-    private RouteService (DaoRoute daoRoute){
+    RouteService(DaoRoute daoRoute){
         this.daoRoute=daoRoute;
     }
 
