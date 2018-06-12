@@ -9,23 +9,30 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
-@RequiredArgsConstructor
-
+@AllArgsConstructor @NoArgsConstructor
 @Table(name = "Prices")
 public class Price {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id_price")
-    private int id;
+    private Long id;
 
     @Column(name = "price")
     private int price;
 
-    @Column(name = "desde")
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date desde;
 
-    @OneToOne
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private Date hasta;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_Rxc")
     private RouteXCabin routeXCabins;
+
+    public Price(int price, Date desde, Date hasta){
+        this.price = price;
+        this.desde = desde;
+        this.hasta = hasta;
+    }
 }

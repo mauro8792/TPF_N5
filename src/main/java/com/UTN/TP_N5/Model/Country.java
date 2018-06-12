@@ -31,11 +31,4 @@ public class Country {
         this.name=name;
         this.iso=iso;
     }
-    public Country(String name){
-        this.name=name;
-    }
-    public Country(Long id){
-        this.id=id;
-    }
-
 }

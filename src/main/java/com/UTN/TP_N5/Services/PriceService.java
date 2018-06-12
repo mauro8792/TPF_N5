@@ -20,9 +20,8 @@ public class PriceService {
     public Boolean guardar(Price nuevo){
         Boolean rtn = false;
         try {
-            if (this.daoPrice.save(nuevo)!=null){
-                rtn = true;
-            }
+            this.daoPrice.save(nuevo);
+            rtn = true;
         }catch (Exception e){
 
         }

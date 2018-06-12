@@ -5,5 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DaoPrice extends JpaRepository<Price,Long> {
 
-
 }

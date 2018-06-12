@@ -2,6 +2,7 @@ package com.UTN.TP_N5.Services;
 
 import com.UTN.TP_N5.Model.Cabin;
 import com.UTN.TP_N5.Repository.DaoCabin;
+import com.UTN.TP_N5.dto.CabinDTO;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,14 @@ public class CabinService {
     private DaoCabin daoCabin;
 
     public  CabinService(DaoCabin daocabin){
-        this.daoCabin=daocabin;
+        this.daoCabin = daocabin;
     }
 
     public Boolean guardar(Cabin nuevo){
         Boolean rtn = false;
         try {
-            if (this.daoCabin.save(nuevo)!=null){
+            if (this.daoCabin.findByNombre(nuevo.getNombre())==null){
+                this.daoCabin.save(nuevo);
                 rtn = true;
             }
         }catch (Exception e){
@@ -60,5 +62,18 @@ public class CabinService {
         }
         return cabinas;
     }
-
+    public Cabin getCabinID(Long id){
+        Cabin cabin = this.daoCabin.findById(id).get();
+        return cabin;
+    }
+    public boolean modifyCabin(CabinDTO cabin, Long id){
+        boolean rtn = false;
+        Cabin cabina = this.getCabinID(id);
+        if(cabina != null){
+            cabina.setNombre(cabin.getNombre());
+            this.guardar(cabina);
+            rtn = true;
+        }
+        return rtn;
+    }
 }

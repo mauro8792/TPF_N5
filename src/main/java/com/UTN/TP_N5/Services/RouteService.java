@@ -15,16 +15,16 @@ public class RouteService {
     @Autowired
     private DaoRoute daoRoute;
 
-    private RouteService (DaoRoute daoRoute){
+    RouteService(DaoRoute daoRoute){
         this.daoRoute=daoRoute;
     }
 
     public Boolean guardar(Routes nuevo){
         Boolean rtn = false;
         try {
-            if (this.daoRoute.save(nuevo)!=null){
+                this.daoRoute.save(nuevo);
                 rtn = true;
-            }
+
         }catch (Exception e){
 
         }

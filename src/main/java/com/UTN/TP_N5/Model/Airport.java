@@ -1,6 +1,7 @@
 package com.UTN.TP_N5.Model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +17,7 @@ public class Airport {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id_airport")
-    private int id;
+    private Long id;
 
     @NotBlank
     @Column(name = "name")
@@ -44,9 +45,5 @@ public class Airport {
         this.latitude = latitude;
         this.longitud=longitud;
 
-    }
-    public Airport(String iata,String name){
-        this.nombre=name;
-        this.iata = iata;
     }
 }

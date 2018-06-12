@@ -34,4 +34,8 @@ public class CabinController {
         List <Cabin> cabinas = (List<Cabin>) this.daoCabin.getAllCabins();
         return cabinas;
     }
+    @PutMapping(value = "/{id}")
+    public void modifyCabin(@RequestBody CabinDTO cabin,@PathVariable ("id") Long id){
+        this.daoCabin.modifyCabin(cabin, id);
+    }
 }

@@ -2,6 +2,7 @@ package com.UTN.TP_N5.Services;
 
 import com.UTN.TP_N5.Model.Airport;
 import com.UTN.TP_N5.Repository.DaoAirport;
+import com.UTN.TP_N5.dto.AirportDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +15,14 @@ public class AirportService {
     private DaoAirport daoAirport;
 
     public AirportService (DaoAirport daoAirport){
+
         this.daoAirport=daoAirport;
     }
     public Boolean guardar(Airport nuevo){
         Boolean rtn=false;
         try {
-            if (this.daoAirport.save(nuevo)!=null){
+            if (this.daoAirport.findByIata(nuevo.getIata())==null){
+                this.daoAirport.save(nuevo);
                 rtn = true;
             }
         }catch (Exception e){
@@ -48,12 +51,24 @@ public class AirportService {
         return mostrar;
     }
     public List getAllAirports(){
-        List<Airport> aeropuertos=null;
+        List<Airport> aeropuertos = null;
         try {
             aeropuertos=this.daoAirport.findAll();
         }catch (Exception e){
 
         }
         return aeropuertos;
+    }
+    public boolean modifyAirport(AirportDTO airport){
+        boolean rtn = false;
+        Airport airpor = this.getByIata(airport.getIata());
+        if(airport != null) {
+            airpor.setLatitude(airport.getLatitude());
+            airpor.setLongitud(airport.getLongitud());
+            airpor.setNombre(airport.getNombre());
+            this.guardar(airpor);
+            rtn = true;
+        }
+        return rtn;
     }
 }

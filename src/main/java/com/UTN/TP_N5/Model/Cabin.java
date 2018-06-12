@@ -18,7 +18,7 @@ public class Cabin {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_cabin")
-    private int id;
+    private Long id;
 
     @NotBlank
     @Column(name = "name")

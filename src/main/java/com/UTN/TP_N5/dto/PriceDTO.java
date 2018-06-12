@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.Date;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Getter @Setter @NoArgsConstructor
 public class PriceDTO {
     private RouteDTO route;
     private CabinDTO cabin;
@@ -17,9 +15,13 @@ public class PriceDTO {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date desde;
 
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private Date hasta;
+
     public PriceDTO(Price price){
         this.price = price.getPrice();
         this.desde = price.getDesde();
+        this.hasta = price.getHasta();
         this.addCabinAndRoute(price);
     }
     public void addCabinAndRoute(Price price){
