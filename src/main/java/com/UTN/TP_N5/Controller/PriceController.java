@@ -29,7 +29,11 @@ public class PriceController {
     @Autowired
     private CabinService cabinService;
 
-    public PriceController(PriceService priceService){ this.daoPrice = priceService;}
+    public PriceController(PriceService priceService, RouteService routeService, CabinService cabinService ){
+        this.daoPrice = priceService;
+        this.routeService = routeService;
+        this.cabinService = cabinService;
+    }
 
     @PostMapping(value = "/")
     public void newPrice(@RequestBody PriceInDTO price){

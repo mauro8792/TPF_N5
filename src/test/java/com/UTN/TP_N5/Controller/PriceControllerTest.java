@@ -1,11 +1,15 @@
 package com.UTN.TP_N5.Controller;
 
+import com.UTN.TP_N5.Model.Cabin;
 import com.UTN.TP_N5.Model.Price;
 import com.UTN.TP_N5.Model.RouteXCabin;
+import com.UTN.TP_N5.Model.Routes;
 import com.UTN.TP_N5.Services.CabinService;
 import com.UTN.TP_N5.Services.PriceService;
 import com.UTN.TP_N5.Services.RouteService;
 import static org.mockito.Mockito.mock;
+
+import com.UTN.TP_N5.dto.PriceInDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,8 @@ import static org.mockito.Mockito.when;
 public class PriceControllerTest {
 
     private PriceService priceService;
+    private CabinService cabinService;
+    private RouteService routeService;
     private PriceController priceController;
     private Price price;
 
@@ -28,9 +34,19 @@ public class PriceControllerTest {
     public void setUp(){
         this.price = new Price((long)1,1200,new Date(),new Date(),new RouteXCabin());
         this.priceService = mock(PriceService.class);
-        this.priceController = new PriceController(this.priceService);
+        this.cabinService = mock(CabinService.class);
+        this.routeService = mock(RouteService.class);
+        this.priceController = new PriceController(this.priceService,this.routeService,this.cabinService);
         when(this.priceService.getAllPrice()).thenReturn(new ArrayList());
         when(this.priceController.getById(this.price.getId())).thenReturn(this.price);
+        when(this.cabinService.getCabinID((long)2)).thenReturn(new Cabin());
+        when(this.routeService.getById((long)1)).thenReturn(new Routes());
+        when(this.priceService.guardar(this.price)).thenReturn(true);
+    }
+    @Test
+    public void saveTest(){
+        PriceInDTO priceIn = new PriceInDTO((long)1,(long)2,1200,this.price.getDesde(),this.price.getHasta());
+        this.priceController.newPrice(priceIn);
     }
     @Test
     public void getAllTest(){
