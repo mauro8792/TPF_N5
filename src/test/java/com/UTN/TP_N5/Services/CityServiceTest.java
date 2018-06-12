@@ -48,13 +48,13 @@ public class CityServiceTest {
         assertTrue(this.cityService.eliminar(this.ciudad.getIata()));
     }
     @Test
-    public void getByIsoTest() {
+    public void getByIataTest() {
         when(mockDao.findByIata("MDQ")).thenReturn(this.ciudad);
         assertNotNull(this.cityService.getByIata("MDQ"));
     }
 
     @Test
-    public void getAllCountryTest(){
+    public void getAllCityTest(){
         when(mockDao.findAll()).thenReturn(new ArrayList<>());
         assertNotNull(this.cityService.getAllCity());
     }

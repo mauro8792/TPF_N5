@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -39,27 +40,28 @@ public class RouteServiceTest {
 
         this.routeService = new RouteService(mockDao);
         this.route = new Routes(this.origin,this.destination, (float)423.00);
+        this.route.setId((long)1);
     }
     @Test
     public void goodSaveTest(){
+         Boolean res = this.routeService.guardar(this.route);
+        assertEquals(Boolean.TRUE,res);
+    }
+
+    @Test
+    public void wrongSaveTest(){
+        when(mockDao.findById(this.route.getId())).thenReturn((Optional.of(this.route)));
         Boolean res = this.routeService.guardar(this.route);
         assertEquals(Boolean.TRUE,res);
     }
-    /*
     @Test
-    public void wrongSaveTest(){
-        when(mockDao.findById(this.route.getId())).thenReturn(this.route);
-        Boolean res = this.routeService.guardar(this.route);
-        assertEquals(Boolean.FALSE,res);
-    }
-    @Test
-    public void getByIsoTest() {
-        when(mockDao.findById(this.route.getId())).thenReturn(this.route);
+    public void getByIdTest() {
+        when(mockDao.findById(this.route.getId())).thenReturn((Optional.of(this.route)));
         assertNotNull(this.routeService.getById(this.route.getId()));
     }
     @Test
-    public void getAllCountryTest(){
+    public void getAllIdTest(){
         when(mockDao.findAll()).thenReturn(new ArrayList<>());
         assertNotNull(this.routeService.getAllRoutes());
-    }*/
+    }
 }

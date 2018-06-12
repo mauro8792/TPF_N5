@@ -31,10 +31,9 @@ public class Price {
     @JoinColumn(name = "id_Rxc")
     private RouteXCabin routeXCabins;
 
-    public Price(int price, Date desde, Date hasta, RouteXCabin rxc){
+    public Price(int price, Date desde, Date hasta){
         this.price = price;
         this.desde = desde;
         this.hasta = hasta;
-        this.routeXCabins = rxc;
     }
 }

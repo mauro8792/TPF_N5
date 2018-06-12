@@ -35,7 +35,8 @@ public class PriceController {
         Cabin cabin = this.cabinService.getCabinID(price.getIdCabin());
         if(route != null && cabin !=null){
             RouteXCabin rxc = new RouteXCabin(route,cabin);
-            Price price1 = new Price(price.getPrecio(),price.getDesde(),price.getHasta(),rxc);
+            Price price1 = new Price(price.getPrecio(),price.getDesde(),price.getHasta());
+            price1.setRouteXCabins(rxc);
             this.daoPrice.guardar(price1);
         }
 

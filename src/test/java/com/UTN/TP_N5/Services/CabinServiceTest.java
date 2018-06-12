@@ -38,7 +38,8 @@ public class CabinServiceTest {
 
     @Test
     public void saveTest(){
-        Boolean res = this.cabinService.guardar(this.cabin);
+        Cabin cabinita= new Cabin((long)2,"Turista");
+        Boolean res = this.cabinService.guardar(cabinita);
         assertEquals(Boolean.TRUE,res);
     }
 
