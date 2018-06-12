@@ -8,10 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-@Getter
-@Setter
-@Entity
-@NoArgsConstructor
+@Getter @Setter @Entity @NoArgsConstructor
 @Table(name = "Airports")
 public class Airport {
     @Id

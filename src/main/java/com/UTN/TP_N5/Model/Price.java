@@ -6,10 +6,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
-@Getter
-@Setter
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @Entity
-@AllArgsConstructor @NoArgsConstructor
 @Table(name = "Prices")
 public class Price {
     @Id
