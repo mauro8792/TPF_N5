@@ -21,6 +21,9 @@ public class RouteController  {
     @Autowired
     private AirportService daoAirport;
 
+    public RouteController(RouteService routeService){
+        this.daoRoute=routeService;
+    }
     @PostMapping(value = "/")
     public void create(@RequestBody RouteDTO nuevo){
         Airport des = daoAirport.getByIata(nuevo.getDestination().getIata());

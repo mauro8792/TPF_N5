@@ -40,4 +40,5 @@ public class PriceControllerTest {
     public void getByIdTest(){
         assertNotNull(this.priceController.getById((long)1));
     }
+
 }

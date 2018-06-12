@@ -17,5 +17,4 @@ public class CityDTO {
         this.setName(ciudad.getName());
         this.country = new CountryDTO(ciudad.getCountry().getIso(),ciudad.getCountry().getName());
     }
-
 }

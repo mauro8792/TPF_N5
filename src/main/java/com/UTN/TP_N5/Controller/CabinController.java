@@ -15,6 +15,10 @@ public class CabinController {
     @Autowired
     private CabinService daoCabin;
 
+    public CabinController(CabinService cabinService){
+        this.daoCabin=cabinService;
+    }
+
     @PostMapping(value = "/")
     public void create(@RequestBody Cabin nuevo){
         this.daoCabin.guardar(nuevo);
@@ -23,8 +27,9 @@ public class CabinController {
     public void deleteCabinForName(@PathVariable("nombre") String nombre){
         daoCabin.eliminar(nombre);
     }
+
     @GetMapping(value = "/{nombre}",produces = "application/json")
-    public CabinDTO getById(@PathVariable("nombre") String nombre){
+    public CabinDTO getByNombre(@PathVariable("nombre") String nombre){
         Cabin cabin = daoCabin.getByNombre(nombre);
         CabinDTO cabinDTO= new CabinDTO(cabin.getNombre());
         return cabinDTO;

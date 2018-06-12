@@ -18,6 +18,10 @@ public class CountryController {
     @Autowired
     private CountryService daoCountry;
 
+    public CountryController(CountryService countryService){
+        this.daoCountry=countryService;
+    }
+
     @PostMapping(value = "/")
     public void create(@RequestBody Country nuevo){
         this.daoCountry.guardar(nuevo);
@@ -29,9 +33,9 @@ public class CountryController {
     }
 
     @GetMapping(value = "/{iso}",produces = "application/json")
-    public CountryDTO getById(@PathVariable("iso") String iso){
-        CountryDTO pais = new CountryDTO();
-        modelMapper.map(this.daoCountry.getByIso(iso),pais);
+    public CountryDTO getByIso(@PathVariable("iso") String iso){
+        CountryDTO pais = new CountryDTO(this.daoCountry.getByIso(iso));
+        //modelMapper.map(this.daoCountry.getByIso(iso),pais);
         return pais;
     }
 

@@ -1,6 +1,4 @@
 package com.UTN.TP_N5.Controller;
-
-
 import com.UTN.TP_N5.Model.Airport;
 import com.UTN.TP_N5.Model.City;
 import com.UTN.TP_N5.Model.Country;
@@ -8,10 +6,8 @@ import com.UTN.TP_N5.Services.AirportService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

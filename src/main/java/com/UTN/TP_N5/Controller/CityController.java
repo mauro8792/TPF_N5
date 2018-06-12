@@ -21,6 +21,10 @@ public class CityController {
     @Autowired
     private CountryService daoCountry;
 
+    public CityController(CityService cityService){
+        this.daocity=cityService;
+    }
+
     @PostMapping(value = "/")
     public void create(@RequestBody CityDTO nuevo){
         Country country = daoCountry.getByIso(nuevo.getCountry().getIso());
@@ -31,9 +35,9 @@ public class CityController {
     }
 
     @GetMapping(value = "/{iata}", produces = "application/json")
-    public CityDTO getByName(@PathVariable("iata") String iata){
-        CityDTO rtn = new CityDTO();
-        modelMapper.map(this.daocity.getByIata(iata),rtn);
+    public CityDTO getByIata(@PathVariable("iata") String iata){
+        CityDTO rtn = new CityDTO(this.daocity.getByIata(iata));
+        //modelMapper.map(this.daocity.getByIata(iata),rtn);
         return rtn;
     }
     @GetMapping(value = "/", produces = "application/json")
