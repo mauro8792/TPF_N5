@@ -4,8 +4,10 @@ import com.UTN.TP_N5.Model.Airport;
 import com.UTN.TP_N5.Model.City;
 import com.UTN.TP_N5.Model.Country;
 import com.UTN.TP_N5.Repository.DaoAirport;
+import com.UTN.TP_N5.dto.AirportDTO;
 import org.junit.Before;
 import org.junit.Test;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
@@ -31,16 +33,18 @@ public class AirportServiceTest {
         this.airportService = new AirportService(mockDao);
         this.country = new Country("Argentina","ARG");
         this.city = new City("Mar del plata","MDQ",this.country);
-        this.airport = new Airport("MDQ","Pistarini",this.city,(float)12.11,(float)11.11);
+        this.airport = new Airport("Pistarini","MDQ",this.city,(float)12.11,(float)11.11);
+        this.airport.setId((long)12);
+        when(mockDao.findByIata(this.airport.getIata())).thenReturn(this.airport);
     }
     @Test
     public void goodSaveTest(){
-        Boolean res = this.airportService.guardar(this.airport);
+        Airport airport1 = new Airport("Ezeiza","EZE",this.city,(float)12.11,(float)11.11);
+        Boolean res = this.airportService.guardar(airport1);
         assertEquals(Boolean.TRUE,res);
     }
     @Test
     public void wrongSaveTest(){
-        when(mockDao.findByIata(this.airport.getIata())).thenReturn(this.airport);
         Boolean res = this.airportService.guardar(this.airport);
         assertEquals(Boolean.FALSE,res);
     }
@@ -51,12 +55,17 @@ public class AirportServiceTest {
 
     @Test
     public void getByIataTest() {
-        when(mockDao.findByIata("EZE")).thenReturn(this.airport);
-        assertNotNull(this.airportService.getByIata("EZE"));
+        when(mockDao.findByIata(this.airport.getIata())).thenReturn(this.airport);
+        assertNotNull(this.airportService.getByIata(this.airport.getIata()));
     }
     @Test
     public void getAllAirportTest(){
         when(mockDao.findAll()).thenReturn(new ArrayList<>());
         assertNotNull(this.airportService.getAllAirports());
+    }
+    @Test
+    public void modifyAirportTest(){
+        AirportDTO airportD = new AirportDTO(this.airport);
+        assertTrue(this.airportService.modifyAirport(airportD));
     }
 }

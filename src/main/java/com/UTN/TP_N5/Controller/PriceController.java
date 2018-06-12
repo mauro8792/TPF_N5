@@ -29,6 +29,8 @@ public class PriceController {
     @Autowired
     private CabinService cabinService;
 
+    public PriceController(PriceService priceService){ this.daoPrice = priceService;}
+
     @PostMapping(value = "/")
     public void newPrice(@RequestBody PriceInDTO price){
         Routes route = this.routeService.getById(price.getIdRoute());

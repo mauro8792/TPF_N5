@@ -1,4 +1,4 @@
-package com.UTN.TP_N5.ServicesTests;
+package com.UTN.TP_N5.Services;
 
 import com.UTN.TP_N5.Model.Cabin;
 import com.UTN.TP_N5.Repository.DaoCabin;
@@ -17,35 +17,40 @@ import static junit.framework.TestCase.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class CabinServiceTest {
 
+    private DaoCabin mockDao;
     private CabinService cabinService;
     private Cabin cabin;
 
     @Before
     public void config(){
-        DaoCabin mockDao = mock(DaoCabin.class);
+        mockDao = mock(DaoCabin.class);
         this.cabinService = new CabinService(mockDao);
         this.cabin = new Cabin((long)1,"Economica");
         when(mockDao.save(this.cabin)).thenReturn(this.cabin);
-        when(mockDao.findByNombre("Economica")).thenReturn(this.cabin);
+        when(mockDao.findByNombre(this.cabin.getNombre())).thenReturn(this.cabin);
         when(mockDao.findById(this.cabin.getId())).thenReturn((Optional.of(this.cabin)));
         when(mockDao.findAll()).thenReturn(new ArrayList<>());
 
     }
 
     @Test
-    public void saveTest(){
-        Cabin cabinita= new Cabin((long)2,"Turista");
-        Boolean res = this.cabinService.guardar(cabinita);
-        assertEquals(Boolean.TRUE,res);
+    public void badSaveTest(){
+        Boolean res = this.cabinService.guardar(this.cabin);
+        assertFalse(res);
     }
-
+    @Test
+    public void goodSaveTest(){
+        Cabin cabinita = new Cabin((long)2,"Primera Clase");
+        Boolean res = this.cabinService.guardar(cabinita);
+        assertTrue(res);
+    }
     @Test
     public void findByNameTest(){
-        assertNotNull(this.cabinService.getByNombre("Economica"));
+
+        assertNotNull(this.cabinService.getByNombre(this.cabin.getNombre()));
     }
 
     @Test
@@ -55,7 +60,7 @@ public class CabinServiceTest {
 
     @Test
     public void deleteTest(){
-        assertTrue(this.cabinService.eliminar("Economica"));
+        assertTrue(this.cabinService.eliminar(this.cabin.getNombre()));
     }
     @Test
     public void modifyCabin(){

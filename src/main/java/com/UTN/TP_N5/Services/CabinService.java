@@ -17,7 +17,7 @@ public class CabinService {
     private DaoCabin daoCabin;
 
     public  CabinService(DaoCabin daocabin){
-        this.daoCabin=daocabin;
+        this.daoCabin = daocabin;
     }
 
     public Boolean guardar(Cabin nuevo){

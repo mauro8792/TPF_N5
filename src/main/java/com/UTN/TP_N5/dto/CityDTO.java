@@ -4,22 +4,18 @@ import com.UTN.TP_N5.Model.City;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
 
 import static com.UTN.TP_N5.TpN5Application.modelMapper;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@NoArgsConstructor @Getter @Setter
 public class CityDTO {
-    private String iata;
-    private String name;
-    private CountryDTO country;
+    private String iata; private String name; private CountryDTO country;
 
     public CityDTO(City ciudad){
-        this.iata = ciudad.getIata();
-        this.name = ciudad.getName();
-        this.country =new CountryDTO();
-        modelMapper.map(ciudad.getCountry(),this.country);
+        this.setIata(ciudad.getIata());
+        this.setName(ciudad.getName());
+        this.country = new CountryDTO(ciudad.getCountry().getIso(),ciudad.getCountry().getName());
     }
 
 }

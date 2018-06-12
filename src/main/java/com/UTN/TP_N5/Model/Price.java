@@ -9,8 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor @NoArgsConstructor
 @Table(name = "Prices")
 public class Price {
     @Id

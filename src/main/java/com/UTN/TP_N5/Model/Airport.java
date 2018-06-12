@@ -46,8 +46,4 @@ public class Airport {
         this.longitud=longitud;
 
     }
-    public Airport(String iata,String name){
-        this.nombre=name;
-        this.iata = iata;
-    }
 }

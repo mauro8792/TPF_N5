@@ -5,11 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import static com.UTN.TP_N5.TpN5Application.modelMapper;
-
-@Getter
-@Setter
-@NoArgsConstructor
+@Getter @Setter @NoArgsConstructor
 public class AirportDTO {
     private String nombre;
     private String iata;
@@ -18,9 +14,8 @@ public class AirportDTO {
     private float longitud;
 
     public AirportDTO(Airport airport){
-        this.ciudad = new CityDTO();
-        modelMapper.map(airport.getCiudad(),this.ciudad);
-        this.iata = airport.getIata();
+        this.ciudad = new CityDTO(airport.getCiudad());
+        this.setIata(airport.getIata());
         this.nombre = airport.getNombre();
         this.longitud = airport.getLongitud();
         this.latitude = airport.getLatitude();

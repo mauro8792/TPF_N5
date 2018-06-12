@@ -9,11 +9,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Setter
-@Getter
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@Setter @Getter @Entity @NoArgsConstructor @AllArgsConstructor
 @Table(name = "routes_x_cabins")
 public class RouteXCabin {
     @Id

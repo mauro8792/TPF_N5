@@ -24,21 +24,22 @@ public class AirportController {
     @Autowired
     private CityService daoCity;
 
+    public AirportController(AirportService service){
+        this.daoAirport = service;
+    }
     @GetMapping(value = "/",produces = "application/json")
     public List getAllAirports(){
         List <Airport> airports = this.daoAirport.getAllAirports();
         List <AirportDTO> airportDTOS = new ArrayList<>();
         for (Airport airport: airports) {
-            AirportDTO airportDTO = new AirportDTO();
-            modelMapper.map(airport,airportDTO);
+            AirportDTO airportDTO = new AirportDTO(airport);
             airportDTOS.add(airportDTO);
         }
         return airportDTOS;
     }
     @GetMapping(value = "/{iata}",produces = "application/json")
     public AirportDTO getByIata(@PathVariable("iata") String iata){
-        AirportDTO avion = new AirportDTO();
-        modelMapper.map(this.daoAirport.getByIata(iata),avion);
+        AirportDTO avion = new AirportDTO(this.daoAirport.getByIata(iata));
         return avion;
     }
     @PostMapping(value = "/")

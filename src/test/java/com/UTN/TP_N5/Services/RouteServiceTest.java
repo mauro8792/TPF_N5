@@ -41,6 +41,7 @@ public class RouteServiceTest {
         this.routeService = new RouteService(mockDao);
         this.route = new Routes(this.origin,this.destination, (float)423.00);
         this.route.setId((long)1);
+        when(mockDao.findById(this.route.getId())).thenReturn((Optional.of(this.route)));
     }
     @Test
     public void goodSaveTest(){
@@ -50,18 +51,21 @@ public class RouteServiceTest {
 
     @Test
     public void wrongSaveTest(){
-        when(mockDao.findById(this.route.getId())).thenReturn((Optional.of(this.route)));
         Boolean res = this.routeService.guardar(this.route);
         assertEquals(Boolean.TRUE,res);
     }
     @Test
     public void getByIdTest() {
-        when(mockDao.findById(this.route.getId())).thenReturn((Optional.of(this.route)));
         assertNotNull(this.routeService.getById(this.route.getId()));
     }
     @Test
     public void getAllIdTest(){
         when(mockDao.findAll()).thenReturn(new ArrayList<>());
         assertNotNull(this.routeService.getAllRoutes());
+    }
+
+    @Test
+        public void delete(){
+        assertTrue(this.routeService.eliminar((long)1));
     }
 }
