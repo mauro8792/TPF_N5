@@ -1,7 +1,7 @@
 package com.UTN.TP_N5.Controller;
-import com.UTN.TP_N5.Model.Country;
+import com.ModelsTP5.Model.Country;
 import com.UTN.TP_N5.Services.CountryService;
-import com.UTN.TP_N5.dto.CountryDTO;
+import com.ModelsTP5.dto.CountryDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;

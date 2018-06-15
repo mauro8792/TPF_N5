@@ -1,10 +1,10 @@
 package com.UTN.TP_N5.Services;
 
-import com.UTN.TP_N5.Model.Airport;
-import com.UTN.TP_N5.Model.City;
-import com.UTN.TP_N5.Model.Country;
+import com.ModelsTP5.Model.Airport;
+import com.ModelsTP5.Model.City;
+import com.ModelsTP5.Model.Country;
 import com.UTN.TP_N5.Repository.DaoAirport;
-import com.UTN.TP_N5.dto.AirportDTO;
+import com.ModelsTP5.dto.AirportDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.modelmapper.ModelMapper;

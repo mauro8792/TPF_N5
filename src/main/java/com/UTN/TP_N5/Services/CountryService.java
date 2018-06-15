@@ -1,11 +1,11 @@
 package com.UTN.TP_N5.Services;
 
-import com.UTN.TP_N5.Model.Country;
+
 import com.UTN.TP_N5.Repository.DaoCountry;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.ModelsTP5.Model.Country;
 import java.util.ArrayList;
 import java.util.List;
 

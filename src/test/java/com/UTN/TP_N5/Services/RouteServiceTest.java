@@ -1,9 +1,9 @@
 package com.UTN.TP_N5.Services;
 
-import com.UTN.TP_N5.Model.Airport;
-import com.UTN.TP_N5.Model.City;
-import com.UTN.TP_N5.Model.Country;
-import com.UTN.TP_N5.Model.Routes;
+import com.ModelsTP5.Model.Airport;
+import com.ModelsTP5.Model.City;
+import com.ModelsTP5.Model.Country;
+import com.ModelsTP5.Model.Routes;
 import com.UTN.TP_N5.Repository.DaoRoute;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,11 +1,11 @@
 package com.UTN.TP_N5.Controller;
 
 
-import com.UTN.TP_N5.Model.Airport;
-import com.UTN.TP_N5.Model.Routes;
+import com.ModelsTP5.Model.Airport;
+import com.ModelsTP5.Model.Routes;
 import com.UTN.TP_N5.Services.AirportService;
 import com.UTN.TP_N5.Services.RouteService;
-import com.UTN.TP_N5.dto.RouteDTO;
+import com.ModelsTP5.dto.RouteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;

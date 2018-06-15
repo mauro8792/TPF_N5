@@ -1,14 +1,14 @@
 package com.UTN.TP_N5.Controller;
 
-import com.UTN.TP_N5.Model.Cabin;
-import com.UTN.TP_N5.Model.Price;
-import com.UTN.TP_N5.Model.RouteXCabin;
-import com.UTN.TP_N5.Model.Routes;
+import com.ModelsTP5.Model.Cabin;
+import com.ModelsTP5.Model.Price;
+import com.ModelsTP5.Model.RouteXCabin;
+import com.ModelsTP5.Model.Routes;
 import com.UTN.TP_N5.Services.CabinService;
 import com.UTN.TP_N5.Services.PriceService;
 import com.UTN.TP_N5.Services.RouteService;
-import com.UTN.TP_N5.dto.PriceDTO;
-import com.UTN.TP_N5.dto.PriceInDTO;
+import com.ModelsTP5.dto.PriceDTO;
+import com.ModelsTP5.dto.PriceInDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;

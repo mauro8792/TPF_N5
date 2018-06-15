@@ -1,6 +1,6 @@
 package com.UTN.TP_N5.Controller;
 
-import com.UTN.TP_N5.Model.Cabin;
+import com.ModelsTP5.Model.Cabin;
 import com.UTN.TP_N5.Services.CabinService;
 import org.junit.Before;
 import org.junit.Test;

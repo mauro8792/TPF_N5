@@ -1,9 +1,9 @@
 package com.UTN.TP_N5.Services;
 
-import com.UTN.TP_N5.Model.Cabin;
+import com.ModelsTP5.Model.Cabin;
 import com.UTN.TP_N5.Repository.DaoCabin;
 import com.UTN.TP_N5.Services.CabinService;
-import com.UTN.TP_N5.dto.CabinDTO;
+import com.ModelsTP5.dto.CabinDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
