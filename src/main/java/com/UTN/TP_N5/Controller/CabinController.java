@@ -20,12 +20,12 @@ public class CabinController {
     }
 
     @PostMapping(value = "/")
-    public void create(@RequestBody Cabin nuevo) {
-        this.daoCabin.guardar(nuevo);
+    public boolean create(@RequestBody Cabin nuevo) {
+        return this.daoCabin.guardar(nuevo);
     }
     @DeleteMapping(value = "/{nombre}")
-    public void deleteCabinForName(@PathVariable("nombre") String nombre) {
-        daoCabin.eliminar(nombre);
+    public boolean deleteCabinForName(@PathVariable("nombre") String nombre) {
+        return daoCabin.eliminar(nombre);
     }
 
     @GetMapping(value = "/{nombre}", produces = "application/json")

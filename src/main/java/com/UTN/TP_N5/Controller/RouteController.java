@@ -21,35 +21,38 @@ public class RouteController  {
     @Autowired
     private AirportService daoAirport;
 
-    public RouteController(RouteService routeService){
-        this.daoRoute=routeService;
+    public RouteController(RouteService routeService, AirportService airportService) {
+        this.daoRoute = routeService;
+        this.daoAirport = airportService;
     }
     @PostMapping(value = "/")
-    public void create(@RequestBody RouteDTO nuevo){
+    public boolean create(@RequestBody RouteDTO nuevo) {
+        boolean ret = false;
         Airport des = daoAirport.getByIata(nuevo.getDestination().getIata());
         Airport ori = daoAirport.getByIata(nuevo.getOrigin().getIata());
-        if(ori!=null && des!=null){
-            Routes niu = new Routes(ori,des,nuevo.getDistance());
-            try{
-                this.daoRoute.guardar(niu);
-            }catch (Exception e){
+        if (ori != null && des != null) {
+            Routes niu = new Routes(ori, des, nuevo.getDistance());
+            try {
+                ret = this.daoRoute.guardar(niu);
+            } catch (Exception e) {
             }
         }
+        return ret;
     }
     @DeleteMapping(value = "/{id}")
-    public void deleteRouteForId(@PathVariable("id") Long id){
-        daoRoute.eliminar(id);
+    public boolean deleteRouteForId(@PathVariable("id") Long id) {
+        return daoRoute.eliminar(id);
     }
     @GetMapping(value = "/{id}",produces = "application/json")
-    public Routes getById(@PathVariable("id") Long id){
+    public Routes getById(@PathVariable("id") Long id) {
         Routes ruta = daoRoute.getById(id);
         return ruta;
     }
     @GetMapping(value = "/")
-    public List getAllRoutes(){
-        List <Routes> rutas = (List<Routes>) this.daoRoute.getAllRoutes();
-        List <RouteDTO> rutasDTO = new ArrayList<>();
-        for (Routes ruta: rutas){
+    public List getAllRoutes() {
+        List<Routes> rutas = (List<Routes>) this.daoRoute.getAllRoutes();
+        List<RouteDTO> rutasDTO = new ArrayList<>();
+        for (Routes ruta: rutas) {
             RouteDTO routeDTO = new RouteDTO(ruta);
             rutasDTO.add(routeDTO);
         }

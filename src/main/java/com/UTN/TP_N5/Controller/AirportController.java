@@ -37,7 +37,7 @@ public class AirportController {
         }
         return airportDTOS;
     }
-    @GetMapping(value = "/{iata}",produces = "application/json")
+    @GetMapping(value = "/{iata}", produces = "application/json")
     public AirportDTO getByIata(@PathVariable("iata") String iata){
         AirportDTO avion = new AirportDTO(this.daoAirport.getByIata(iata));
         return avion;

@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -26,6 +27,8 @@ public class CabinControllerTest{
         this.cabin=new Cabin((long)1,"Turista");
         when(this.cabinService.getAllCabins()).thenReturn(new ArrayList());
         when(this.cabinService.getByNombre("Turista")).thenReturn(this.cabin);
+        when(this.cabinService.guardar(this.cabin)).thenReturn(true);
+        when(this.cabinService.eliminar("Turista")).thenReturn(true);
     }
     @Test
     public void getAllTest(){
@@ -33,7 +36,10 @@ public class CabinControllerTest{
     }
     @Test
     public void getByNombreTest(){assertNotNull(this.cabinController.getByNombre("Turista")); }
-
+    @Test
+    public void saveTest(){ assertTrue(this.cabinController.create(this.cabin));}
+    @Test
+    public  void deleteTest(){assertTrue(this.cabinController.deleteCabinForName("Turista"));}
 
 
 

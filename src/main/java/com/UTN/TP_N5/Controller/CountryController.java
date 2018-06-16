@@ -16,32 +16,31 @@ public class CountryController {
     @Autowired
     private CountryService daoCountry;
 
-    public CountryController(CountryService countryService){
-        this.daoCountry=countryService;
+    public CountryController(CountryService countryService) {
+        this.daoCountry = countryService;
     }
 
     @PostMapping(value = "/")
-    public void create(@RequestBody Country nuevo){
-        this.daoCountry.guardar(nuevo);
+    public boolean create(@RequestBody Country nuevo) {
+         return this.daoCountry.guardar(nuevo);
     }
 
     @DeleteMapping (value = "/{iso}")
-    public void deleteCountryForIso(@PathVariable("iso") String iso){
-        this.daoCountry.eliminar(iso);
+    public boolean deleteCountryForIso(@PathVariable("iso") String iso) {
+        return this.daoCountry.eliminar(iso);
     }
 
     @GetMapping(value = "/{iso}",produces = "application/json")
-    public CountryDTO getByIso(@PathVariable("iso") String iso){
+    public CountryDTO getByIso(@PathVariable("iso") String iso) {
         CountryDTO pais = new CountryDTO(this.daoCountry.getByIso(iso));
-        //modelMapper.map(this.daoCountry.getByIso(iso),pais);
         return pais;
     }
 
     @GetMapping(value = "/")
-    public List getAllCountrie(){
+    public List getAllCountrie() {
         List<Country> countries = this.daoCountry.getAllCountry();
         List<CountryDTO> countryDTOS = new ArrayList<>();
-        for(Country country : countries){
+        for (Country country : countries) {
             CountryDTO countryDTO = new CountryDTO(country);
             countryDTOS.add(countryDTO);
         }
