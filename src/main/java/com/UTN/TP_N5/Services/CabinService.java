@@ -1,8 +1,8 @@
 package com.UTN.TP_N5.Services;
 
-import com.UTN.TP_N5.Model.Cabin;
+import com.ModelsTP5.Model.Cabin;
 import com.UTN.TP_N5.Repository.DaoCabin;
-import com.UTN.TP_N5.dto.CabinDTO;
+import com.ModelsTP5.dto.CabinDTO;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

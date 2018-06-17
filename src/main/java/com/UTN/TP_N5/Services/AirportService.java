@@ -1,8 +1,8 @@
 package com.UTN.TP_N5.Services;
 
-import com.UTN.TP_N5.Model.Airport;
+import com.ModelsTP5.Model.Airport;
 import com.UTN.TP_N5.Repository.DaoAirport;
-import com.UTN.TP_N5.dto.AirportDTO;
+import com.ModelsTP5.dto.AirportDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

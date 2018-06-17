@@ -1,16 +1,15 @@
 package com.UTN.TP_N5.Controller;
 
-import com.UTN.TP_N5.Model.City;
-import com.UTN.TP_N5.Model.Country;
+import com.ModelsTP5.Model.City;
+import com.ModelsTP5.Model.Country;
 import com.UTN.TP_N5.Services.CityService;
 import com.UTN.TP_N5.Services.CountryService;
-import com.UTN.TP_N5.dto.CityDTO;
+import com.ModelsTP5.dto.CityDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.UTN.TP_N5.TpN5Application.modelMapper;
 
 @RestController
 @RequestMapping(value = "/city")
@@ -20,6 +19,11 @@ public class CityController {
     private CityService daocity;
     @Autowired
     private CountryService daoCountry;
+
+    public CityController(CityService cityService, CountryService countryService){
+        this.daocity=cityService;
+        this.daoCountry = countryService;
+    }
 
     @PostMapping(value = "/")
     public void create(@RequestBody CityDTO nuevo){
@@ -31,9 +35,8 @@ public class CityController {
     }
 
     @GetMapping(value = "/{iata}", produces = "application/json")
-    public CityDTO getByName(@PathVariable("iata") String iata){
-        CityDTO rtn = new CityDTO();
-        modelMapper.map(this.daocity.getByIata(iata),rtn);
+    public CityDTO getByIata(@PathVariable("iata") String iata){
+        CityDTO rtn = new CityDTO(this.daocity.getByIata(iata));
         return rtn;
     }
     @GetMapping(value = "/", produces = "application/json")
@@ -41,8 +44,7 @@ public class CityController {
         List <City> ciudades = (List<City>) this.daocity.getAllCity();
         List <CityDTO> ciudadesDTO = new ArrayList<>();
         for (City ciudad: ciudades) {
-            CityDTO cityDTO = new CityDTO();
-            modelMapper.map(ciudad,cityDTO);
+            CityDTO cityDTO = new CityDTO(ciudad);
             ciudadesDTO.add(cityDTO);
         }
         return ciudadesDTO;

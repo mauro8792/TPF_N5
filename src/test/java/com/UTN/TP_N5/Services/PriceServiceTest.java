@@ -1,8 +1,8 @@
 package com.UTN.TP_N5.Services;
 
-import com.UTN.TP_N5.Model.City;
-import com.UTN.TP_N5.Model.Country;
-import com.UTN.TP_N5.Model.Price;
+import com.ModelsTP5.Model.City;
+import com.ModelsTP5.Model.Country;
+import com.ModelsTP5.Model.Price;
 import com.UTN.TP_N5.Repository.DaoCity;
 import com.UTN.TP_N5.Repository.DaoPrice;
 import org.junit.Before;

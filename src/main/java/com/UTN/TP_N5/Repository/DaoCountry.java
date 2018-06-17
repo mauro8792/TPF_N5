@@ -1,6 +1,7 @@
 package com.UTN.TP_N5.Repository;
 
-import com.UTN.TP_N5.Model.Country;
+
+import com.ModelsTP5.Model.Country;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

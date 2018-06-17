@@ -1,6 +1,6 @@
 package com.UTN.TP_N5.Services;
 
-import com.UTN.TP_N5.Model.Price;
+import com.ModelsTP5.Model.Price;
 import com.UTN.TP_N5.Repository.DaoPrice;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
