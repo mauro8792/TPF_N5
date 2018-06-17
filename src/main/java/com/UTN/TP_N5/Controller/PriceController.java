@@ -4,6 +4,7 @@ import com.ModelsTP5.Model.Cabin;
 import com.ModelsTP5.Model.Price;
 import com.ModelsTP5.Model.RouteXCabin;
 import com.ModelsTP5.Model.Routes;
+import com.ModelsTP5.dto.RouteDTO;
 import com.UTN.TP_N5.Services.CabinService;
 import com.UTN.TP_N5.Services.PriceService;
 import com.UTN.TP_N5.Services.RouteService;
@@ -13,8 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
 
 @RestController
 @RequestMapping("/price")
@@ -46,6 +53,26 @@ public class PriceController {
             this.daoPrice.guardar(price1);
         }
 
+    }
+    @GetMapping(value = "/especific/{destino}/{origen}/{fecha}")
+    public List especificRouteandDate(@PathVariable(value = "destino") String destino, @PathVariable(value = "origen") String origen,@PathVariable(value = "fecha") String fechita) throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date fecha = dateFormat.parse(fechita);
+        Routes route = this.routeService.getEspecificRoute(destino,origen);
+        List<PriceDTO> resultado = null;
+        if (route != null) {
+            resultado = new ArrayList<>();
+            for (RouteXCabin rxc : route.getCabinas()) {
+                for (Price price : rxc.getPrecios()) {
+                    if (price.getDesde().compareTo(fecha) < 1 && price.getHasta().compareTo(fecha) > 1) {
+                        resultado.add(new PriceDTO(price));
+                        break;
+                    }
+                }
+            }
+
+        }
+        return resultado;
     }
 
     @GetMapping(value = "/", produces = "application/json")

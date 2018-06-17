@@ -19,48 +19,48 @@ public class CityService {
     @Autowired
     private DaoCountry daoCountry;
 
-    public CityService(DaoCity daoCity){
+    public CityService(DaoCity daoCity) {
         this.daoCity = daoCity;
     }
 
 
-    public Boolean guardar(City nuevo){
-        Boolean rtn=false;
+    public Boolean guardar(City nuevo) {
+        Boolean rtn = false;
         try {
-            if (this.daoCity.findByIata(nuevo.getIata())==null){
+            if (this.daoCity.findByIata(nuevo.getIata()) == null) {
                 this.daoCity.save(nuevo);
                 rtn = true;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return rtn;
     }
-    public Boolean eliminar(String iata){
-        Boolean rtn=false;
-        try{
+    public Boolean eliminar(String iata) {
+        Boolean rtn = false;
+        try {
             City del = this.daoCity.findByIata(iata);
             this.daoCity.delete(del);
             rtn = true;
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return rtn;
     }
-    public City getByIata (String iata){
+    public City getByIata (String iata) {
         City mostrar = null;
         try {
-            mostrar=this.daoCity.findByIata(iata);
-        }catch (Exception e){
+            mostrar = this.daoCity.findByIata(iata);
+        } catch (Exception e) {
 
         }
         return mostrar;
     }
-    public List getAllCity(){
-        List<City> ciudades=null;
+    public List getAllCity() {
+        List<City> ciudades = null;
         try {
-            ciudades=this.daoCity.findAll();
-        }catch (Exception e){
+            ciudades = this.daoCity.findAll();
+        } catch (Exception e) {
 
         }
         return ciudades;

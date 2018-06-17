@@ -16,49 +16,49 @@ public class CountryService {
     @Autowired
     private DaoCountry daoCountry;
 
-    public CountryService(DaoCountry daoCountry){
+    public CountryService(DaoCountry daoCountry) {
         this.daoCountry = daoCountry;
     }
 
-    public Boolean guardar(Country nuevo){
+    public Boolean guardar(Country nuevo) {
         Boolean rtn = false;
         try {
-            if (this.daoCountry.findByIso(nuevo.getIso())==null){
+            if (this.daoCountry.findByIso(nuevo.getIso()) == null) {
                 this.daoCountry.save(nuevo);
                 rtn = true;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return rtn;
     }
 
-    public Boolean eliminar (String eliminar){
+    public Boolean eliminar (String eliminar) {
         Boolean rtn = false;
         try {
             Country del = this.daoCountry.findByIso(eliminar);
             this.daoCountry.delete(del);
             rtn = true;
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return rtn;
      }
 
-    public  Country getByIso(String iso){
+    public  Country getByIso(String iso) {
         Country mostrar = null;
-        try{
+        try {
              mostrar = this.daoCountry.findByIso(iso);
 
-        }catch (Exception e){
+        } catch (Exception e) {
         }
         return  mostrar;
     }
-    public List getAllCountry (){
-        List<Country> countries=null;
+    public List getAllCountry() {
+        List<Country> countries = null;
         try {
-            countries=this.daoCountry.findAll();
-        }catch (Exception e){
+            countries = this.daoCountry.findAll();
+        } catch (Exception e) {
 
         }
         return countries;

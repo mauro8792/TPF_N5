@@ -14,55 +14,54 @@ public class AirportService {
     @Autowired
     private DaoAirport daoAirport;
 
-    public AirportService (DaoAirport daoAirport){
-
-        this.daoAirport=daoAirport;
+    public AirportService (DaoAirport daoAirport) {
+        this.daoAirport = daoAirport;
     }
-    public Boolean guardar(Airport nuevo){
-        Boolean rtn=false;
+    public Boolean guardar(Airport nuevo) {
+        Boolean rtn = false;
         try {
-            if (this.daoAirport.findByIata(nuevo.getIata())==null){
+            if (this.daoAirport.findByIata(nuevo.getIata()) == null) {
                 this.daoAirport.save(nuevo);
                 rtn = true;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return rtn;
     }
-    public Boolean eliminar(String iata){
-        Boolean rtn=false;
-        try{
+    public Boolean eliminar(String iata) {
+        Boolean rtn = false;
+        try {
             Airport del = this.daoAirport.findByIata(iata);
             this.daoAirport.delete(del);
             rtn = true;
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return rtn;
     }
-    public Airport getByIata (String iata){
+    public Airport getByIata (String iata) {
         Airport mostrar = null;
         try {
-            mostrar=this.daoAirport.findByIata(iata);
-        }catch (Exception e){
+            mostrar = this.daoAirport.findByIata(iata);
+        } catch (Exception e) {
 
         }
         return mostrar;
     }
-    public List getAllAirports(){
+    public List getAllAirports() {
         List<Airport> aeropuertos = null;
         try {
-            aeropuertos=this.daoAirport.findAll();
-        }catch (Exception e){
+            aeropuertos = this.daoAirport.findAll();
+        } catch (Exception e) {
 
         }
         return aeropuertos;
     }
-    public boolean modifyAirport(AirportDTO airport){
+    public boolean modifyAirport(AirportDTO airport) {
         boolean rtn = false;
         Airport airpor = this.getByIata(airport.getIata());
-        if(airport != null) {
+        if (airport != null) {
             airpor.setLatitude(airport.getLatitude());
             airpor.setLongitud(airport.getLongitud());
             airpor.setNombre(airport.getNombre());
