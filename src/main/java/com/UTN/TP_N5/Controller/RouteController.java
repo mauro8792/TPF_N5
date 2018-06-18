@@ -43,6 +43,10 @@ public class RouteController  {
     public boolean deleteRouteForId(@PathVariable("id") Long id) {
         return daoRoute.eliminar(id);
     }
+    @GetMapping (value = "/exactRoute/{origen}/{destino}")
+    public RouteDTO getExact(@PathVariable(value = "origen")String  origen, @PathVariable(value = "destino") String destino) {
+        return new RouteDTO(this.daoRoute.getEspecificRoute(origen, destino));
+    }
     @GetMapping(value = "/{id}", produces = "application/json")
     public Routes getById(@PathVariable("id") Long id) {
         Routes ruta = daoRoute.getById(id);

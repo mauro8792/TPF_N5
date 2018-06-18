@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
@@ -34,14 +35,16 @@ public class RouteServiceTest {
         this.pais = new Country("Argentina","ARG");
         this.city = new City("Mar del plata","MDQ",this.pais);
 
-        this.origin = new Airport("MDQ","Pistarini",this.city,(float)12.11,(float)11.11);
-        this.destination= new Airport("EZE","Ezieza",this.city,(float)12.11,(float)11.11);
+        this.origin = new Airport("Pistarini","MDQ",this.city,(float)12.11,(float)11.11);
+        this.destination= new Airport("Ezeiza","EZE",this.city,(float)12.11,(float)11.11);
 
 
         this.routeService = new RouteService(mockDao);
         this.route = new Routes(this.origin,this.destination, (float)423.00);
         this.route.setId((long)1);
         when(mockDao.findById(this.route.getId())).thenReturn((Optional.of(this.route)));
+
+
     }
     @Test
     public void goodSaveTest(){
@@ -60,10 +63,18 @@ public class RouteServiceTest {
     }
     @Test
     public void getAllIdTest(){
-        when(mockDao.findAll()).thenReturn(new ArrayList<>());
+        List a = new ArrayList();
+        a.add(this.route);
+        when(this.mockDao.findAll()).thenReturn(a);
         assertNotNull(this.routeService.getAllRoutes());
     }
-
+    @Test
+    public void goodGetEspecific() {
+        List a = new ArrayList();
+        a.add(this.route);
+        when(this.mockDao.findAll()).thenReturn(a);
+        assertNotNull(this.routeService.getEspecificRoute("MDQ","EZE"));
+    }
     @Test
         public void delete(){
         assertTrue(this.routeService.eliminar((long)1));

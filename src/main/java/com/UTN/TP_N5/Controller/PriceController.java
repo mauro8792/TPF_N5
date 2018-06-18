@@ -57,10 +57,10 @@ public class PriceController {
         }
 
     }
-    @GetMapping(value = "/especific/{destino}/{origen}/{fecha}")
+    @GetMapping(value = "/especific/{origen}/{destino}/{fecha}")
     public List especificRouteandDate(@PathVariable(value = "destino") String destino, @PathVariable(value = "origen") String origen,@PathVariable(value = "fecha") String fechita) throws ParseException {
         LocalDate fecha = LocalDate.parse(fechita);
-        Routes route = this.routeService.getEspecificRoute(destino,origen);
+        Routes route = this.routeService.getEspecificRoute(origen,destino);
         List<PriceDTO> resultado = null;
         if (route != null) {
             resultado = new ArrayList<>();

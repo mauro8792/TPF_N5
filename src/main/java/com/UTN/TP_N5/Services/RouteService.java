@@ -42,7 +42,7 @@ public class RouteService {
         return rtn;
     }
 
-    public Routes getEspecificRoute (String destino, String origen) {
+    public Routes getEspecificRoute (String origen, String destino) {
         Routes rtn = null;
         List<Routes> rutas = this.getAllRoutes();
         for(Routes route :rutas) {
