@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -56,15 +59,14 @@ public class PriceController {
     }
     @GetMapping(value = "/especific/{destino}/{origen}/{fecha}")
     public List especificRouteandDate(@PathVariable(value = "destino") String destino, @PathVariable(value = "origen") String origen,@PathVariable(value = "fecha") String fechita) throws ParseException {
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        Date fecha = dateFormat.parse(fechita);
+        LocalDate fecha = LocalDate.parse(fechita);
         Routes route = this.routeService.getEspecificRoute(destino,origen);
         List<PriceDTO> resultado = null;
         if (route != null) {
             resultado = new ArrayList<>();
             for (RouteXCabin rxc : route.getCabinas()) {
                 for (Price price : rxc.getPrecios()) {
-                    if (price.getDesde().compareTo(fecha) < 1 && price.getHasta().compareTo(fecha) > 1) {
+                    if ((fecha.isAfter(price.getDesde())) && (fecha.isBefore(price.getHasta()))) {
                         resultado.add(new PriceDTO(price));
                         break;
                     }
