@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
@@ -26,8 +27,8 @@ public class PriceServiceTest {
     private DaoPrice mockDao;
     private Price price;
     private PriceService priceService;
-    private Date desde;
-    private Date hasta;
+    private LocalDate desde;
+    private LocalDate hasta;
 
 
     @Before
@@ -35,15 +36,11 @@ public class PriceServiceTest {
         mockDao = mock(DaoPrice.class);
         when(mockDao.save(this.price)).thenReturn(this.price);
 
-        String fecha="20-05-2018";
-        DateFormat fechita= new SimpleDateFormat("dd-MM-yyyy");
-        Date inputDate= fechita.parse(fecha);
-        this.desde= inputDate;
-
-        String fecha2="20-05-2018";
-        DateFormat fechita2= new SimpleDateFormat("dd-MM-yyyy");
-        Date inputDate2= fechita2.parse(fecha2);
-        this.hasta=inputDate2;
+        String fecha = "2018-05-20";
+        LocalDate inputDate = LocalDate.parse(fecha);
+        this.desde = inputDate;
+        LocalDate inputDate2 = LocalDate.parse(fecha);
+        this.hasta = inputDate2;
 
         this.priceService = new PriceService(mockDao);
         this.price = new Price(500,this.desde,this.hasta);

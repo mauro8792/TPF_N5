@@ -10,13 +10,14 @@ import com.UTN.TP_N5.Services.RouteService;
 import static org.mockito.Mockito.mock;
 
 import com.ModelsTP5.dto.PriceInDTO;
+import org.apache.tomcat.jni.Local;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -32,7 +33,8 @@ public class PriceControllerTest {
 
     @Before
     public void setUp(){
-        this.price = new Price((long)1,1200,new Date(),new Date(),new RouteXCabin());
+        LocalDate fecha = LocalDate.parse("2018-06-02");
+        this.price = new Price((long)1,1200,fecha,fecha,new RouteXCabin());
         this.priceService = mock(PriceService.class);
         this.cabinService = mock(CabinService.class);
         this.routeService = mock(RouteService.class);
@@ -55,6 +57,10 @@ public class PriceControllerTest {
     @Test
     public void getByIdTest(){
         assertNotNull(this.priceController.getById((long)1));
+    }
+    @Test
+    public void searchbyRoute(){
+
     }
 
 }
